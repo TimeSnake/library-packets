@@ -1,0 +1,27 @@
+package de.timesnake.basic.packets.core.packet.out.border;
+
+import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
+import net.minecraft.network.protocol.game.ClientboundSetBorderCenterPacket;
+import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
+
+public class ExClientboundSetBorderCenterPacket extends ExPacketPlayOut implements de.timesnake.basic.packets.util.ExClientboundSetBorderCenterPacket {
+
+    public ExClientboundSetBorderCenterPacket(ClientboundSetBorderCenterPacket packet) {
+        super(packet);
+    }
+
+    public ExClientboundSetBorderCenterPacket(World world, double centerX, double centerZ) {
+        super(new ClientboundSetBorderCenterPacket(PacketWorldBorder.center(((CraftWorld) world).getHandle(), centerX, centerZ)));
+    }
+
+    @Override
+    public String getInfo() {
+        return "border center";
+    }
+
+    @Override
+    public Type getType() {
+        return Type.PLAY_OUT_WORLD_BORDER_CENTER;
+    }
+}
