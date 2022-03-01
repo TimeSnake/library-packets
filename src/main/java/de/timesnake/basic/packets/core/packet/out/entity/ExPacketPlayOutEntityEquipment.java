@@ -1,8 +1,9 @@
-package de.timesnake.basic.packets.core.packet.out;
+package de.timesnake.basic.packets.core.packet.out.entity;
 
 import com.mojang.datafixers.util.Pair;
 import de.timesnake.basic.entities.entity.extension.ExEntity;
 import de.timesnake.basic.packets.core.BukkitNmsParser;
+import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.basic.util.Tuple;
 import de.timesnake.library.reflection.wrapper.ExEnumItemSlot;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityEquipment;

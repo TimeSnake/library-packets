@@ -1,8 +1,9 @@
-package de.timesnake.basic.packets.core.packet.out;
+package de.timesnake.basic.packets.core.packet.out.entity;
 
 import de.timesnake.basic.entities.entity.bukkit.ExPlayer;
 import de.timesnake.basic.entities.entity.extension.EntityExtension;
 import de.timesnake.basic.entities.entity.extension.ExEntity;
+import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.RefUtil;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityMetadata;
 import net.minecraft.network.syncher.DataWatcher;

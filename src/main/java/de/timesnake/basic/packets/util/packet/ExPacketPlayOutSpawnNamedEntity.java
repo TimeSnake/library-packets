@@ -6,11 +6,11 @@ import org.bukkit.entity.Player;
 public interface ExPacketPlayOutSpawnNamedEntity extends ExPacketPlayOut {
 
     static ExPacketPlayOutSpawnNamedEntity wrap(Player player) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutSpawnNamedEntity(player);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutSpawnNamedEntity(player);
     }
 
     static ExPacketPlayOutSpawnNamedEntity wrap(ExPlayer player) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutSpawnNamedEntity(player);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutSpawnNamedEntity(player);
     }
 
     @Override

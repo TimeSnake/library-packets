@@ -8,14 +8,14 @@ import org.bukkit.entity.Entity;
 public interface ExPacketPlayOutEntityHeadRotation extends ExPacketPlayOut {
 
     static ExPacketPlayOutEntityHeadRotation wrap(EntityExtension<?> entity, float yaw) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityHeadRotation(entity, yaw);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation(entity, yaw);
     }
 
     static ExPacketPlayOutEntityHeadRotation wrap(Entity entity, float yaw) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityHeadRotation(((CraftEntity) entity).getHandle(), yaw);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation(((CraftEntity) entity).getHandle(), yaw);
     }
 
     static ExPacketPlayOutEntityHeadRotation wrap(ExEntity entity, float yaw) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityHeadRotation(entity.getNMS(), yaw);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation(entity.getNMS(), yaw);
     }
 }

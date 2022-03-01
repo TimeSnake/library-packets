@@ -1,6 +1,7 @@
-package de.timesnake.basic.packets.core.packet.out;
+package de.timesnake.basic.packets.core.packet.out.entity;
 
 import de.timesnake.basic.entities.entity.extension.ExEntityLiving;
+import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
 import net.minecraft.network.protocol.game.PacketPlayOutSpawnEntityLiving;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;

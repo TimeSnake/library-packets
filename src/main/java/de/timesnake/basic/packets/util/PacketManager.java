@@ -23,7 +23,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.logging.Level;
 
 public class PacketManager implements Listener {
@@ -191,7 +194,7 @@ public class PacketManager implements Listener {
             }
 
             if (packetPlayOut == null) {
-                PacketManager.this.broadcast("PacketWrite null");
+                PacketManager.this.broadcast("PacketWrite null: " + packet.getClass().getSimpleName());
                 super.write(channelHandlerContext, packet, channelPromise);
                 return;
             }
@@ -234,7 +237,6 @@ public class PacketManager implements Listener {
             if (block) {
                 return;
             }
-
 
             if (packetPlayOut != null) {
                 super.write(channelHandlerContext, packetPlayOut.getPacket(), channelPromise);

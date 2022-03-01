@@ -7,20 +7,14 @@ import org.bukkit.entity.Player;
 public interface ExPacketPlayOutSpawnEntityLiving extends ExPacketPlayOut {
 
     static ExPacketPlayOutSpawnEntityLiving wrap(Player player) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutSpawnEntityLiving(player);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntityLiving(player);
     }
 
     static ExPacketPlayOutSpawnEntityLiving wrap(LivingEntity entity) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutSpawnEntityLiving(entity);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntityLiving(entity);
     }
 
     static ExPacketPlayOutSpawnEntityLiving wrap(ExEntityLiving entity) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutSpawnEntityLiving(entity);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntityLiving(entity);
     }
-
-    @Override
-    String getInfo();
-
-    @Override
-    Type getType();
 }

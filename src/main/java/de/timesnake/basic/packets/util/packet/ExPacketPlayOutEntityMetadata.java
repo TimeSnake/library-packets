@@ -25,15 +25,15 @@ public interface ExPacketPlayOutEntityMetadata extends ExPacketPlayOut {
     }
 
     static ExPacketPlayOutEntityMetadata wrap(Player player, DataType type) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityMetadata(player, type);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata(player, type);
     }
 
     static ExPacketPlayOutEntityMetadata wrap(EntityExtension<?> entity, DataType type) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityMetadata(entity, type);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata(entity, type);
     }
 
     static ExPacketPlayOutEntityMetadata wrap(ExEntity entity, DataType type) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityMetadata(entity, type);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata(entity, type);
     }
 
     Integer getNMSIndex();
