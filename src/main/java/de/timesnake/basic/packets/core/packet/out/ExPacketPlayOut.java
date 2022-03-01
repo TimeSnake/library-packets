@@ -6,6 +6,10 @@ import de.timesnake.basic.packets.core.packet.out.border.ExClientboundInitialize
 import de.timesnake.basic.packets.core.packet.out.border.ExClientboundSetBorderCenterPacket;
 import de.timesnake.basic.packets.core.packet.out.border.ExClientboundSetBorderLerpSizePacket;
 import de.timesnake.basic.packets.core.packet.out.border.ExClientboundSetBorderSizePacket;
+import de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityEquipment;
+import de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation;
+import de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityLook;
+import de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata;
 import de.timesnake.basic.packets.core.packet.out.scoreboard.*;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.protocol.Packet;

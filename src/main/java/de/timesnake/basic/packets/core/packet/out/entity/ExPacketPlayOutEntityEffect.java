@@ -1,5 +1,6 @@
-package de.timesnake.basic.packets.core.packet.out;
+package de.timesnake.basic.packets.core.packet.out.entity;
 
+import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectList;

@@ -19,6 +19,6 @@ public interface ExPacketPlayOutEntityEffect extends ExPacketPlayOut {
     }
 
     static ExPacketPlayOutEntityEffect wrap(Player player, Effect effect, byte amplifier, int duration, boolean ambient, boolean showParticles, boolean showIcon) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityEffect(player, effect, amplifier, duration, ambient, showParticles, showIcon);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityEffect(player, effect, amplifier, duration, ambient, showParticles, showIcon);
     }
 }

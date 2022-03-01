@@ -11,10 +11,10 @@ import java.util.List;
 public interface ExPacketPlayOutEntityEquipment extends ExPacketPlayOut {
 
     static ExPacketPlayOutEntityEquipment wrap(Entity entity, List<Tuple<EquipmentSlot, ItemStack>> equipment) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityEquipment(entity, equipment);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityEquipment(entity, equipment);
     }
 
     static ExPacketPlayOutEntityEquipment wrap(ExEntity entity, List<Tuple<EquipmentSlot, ItemStack>> equipment) {
-        return new de.timesnake.basic.packets.core.packet.out.ExPacketPlayOutEntityEquipment(entity, equipment);
+        return new de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityEquipment(entity, equipment);
     }
 }
