@@ -1,7 +1,16 @@
 package de.timesnake.basic.packets.util.packet;
 
+import de.timesnake.basic.packets.core.packet.out.scoreboard.ExPacketPlayOutTablistPlayer;
+import de.timesnake.basic.packets.core.packet.out.scoreboard.ExPacketPlayOutTablistPlayerAdd;
+import de.timesnake.basic.packets.core.packet.out.scoreboard.ExPacketPlayOutTablistPlayerRemove;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.PacketPlayOutPlayerInfo;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public interface ExPacket {
 
@@ -11,13 +20,19 @@ public interface ExPacket {
 
     boolean equals(Object obj);
 
+    Map<Class<? extends Packet<?>>, Class<? extends ExPacket>> EX_PACKET_CLASS_BY_PACKET_CLASS = new ConcurrentHashMap<>();
+
     enum Type {
 
         // tablist player
-        PLAY_OUT_TABLIST_PLAYER_ADD, PLAY_OUT_TABLIST_PLAYER_REMOVE, PLAY_OUT_TABLIST_PLAYER(PLAY_OUT_TABLIST_PLAYER_ADD, PLAY_OUT_TABLIST_PLAYER_REMOVE),
+        PLAY_OUT_TABLIST_PLAYER_ADD(ExPacketPlayOutTablistPlayerAdd.class, PacketPlayOutPlayerInfo.class), PLAY_OUT_TABLIST_PLAYER_REMOVE(ExPacketPlayOutTablistPlayerRemove.class, PacketPlayOutPlayerInfo.class),
+
+        PLAY_OUT_TABLIST_PLAYER(ExPacketPlayOutTablistPlayer.class, PacketPlayOutPlayerInfo.class, PLAY_OUT_TABLIST_PLAYER_ADD, PLAY_OUT_TABLIST_PLAYER_REMOVE),
 
         // tablist team
-        PLAY_OUT_TABLIST_TEAM_CREATION, PLAY_OUT_TABLIST_TEAM_UPDATE, PLAY_OUT_TABLIST_TEAM_PLAYER_ADD, PLAY_OUT_TABLIST_TEAM_PLAYER_REMOVE, PLAY_OUT_TABLIST_TEAM_REMOVE, PLAY_OUT_TABLIST_TEAM(PLAY_OUT_TABLIST_TEAM_CREATION, PLAY_OUT_TABLIST_TEAM_UPDATE, PLAY_OUT_TABLIST_TEAM_PLAYER_ADD, PLAY_OUT_TABLIST_TEAM_PLAYER_REMOVE, PLAY_OUT_TABLIST_TEAM_REMOVE),
+        PLAY_OUT_TABLIST_TEAM_CREATION, PLAY_OUT_TABLIST_TEAM_UPDATE, PLAY_OUT_TABLIST_TEAM_PLAYER_ADD, PLAY_OUT_TABLIST_TEAM_PLAYER_REMOVE, PLAY_OUT_TABLIST_TEAM_REMOVE,
+
+        PLAY_OUT_TABLIST_TEAM(PLAY_OUT_TABLIST_TEAM_CREATION, PLAY_OUT_TABLIST_TEAM_UPDATE, PLAY_OUT_TABLIST_TEAM_PLAYER_ADD, PLAY_OUT_TABLIST_TEAM_PLAYER_REMOVE, PLAY_OUT_TABLIST_TEAM_REMOVE),
 
         // tablist header footer
         PLAY_OUT_TABLIST_HEADER_FOOTER,
@@ -40,11 +55,13 @@ public interface ExPacket {
         // entity
         PLAY_OUT_SPAWN_ENTITY_LIVING, PLAY_OUT_DESTROY_ENTITY, PLAY_OUT_SPAWN_NAMED_ENTITY, PLAY_OUT_ENTITY_EFFECT, PLAY_OUT_ENTITY_EFFECT_REMOVE, PLAY_OUT_ENTITY_METADATA, PLAY_OUT_ENTITY_EQUIPMENT, PLAY_OUT_ENTITY_HEAD_ROTATION, PLAY_OUT_ENTITY_LOOK, PLAY_OUT_ENTITY_TELEPORT, PLAY_OUT_ENTITY_REL_MOVE_LOOK,
 
+        PLAY_OUT_ENTITY(PLAY_OUT_SPAWN_ENTITY_LIVING, PLAY_OUT_DESTROY_ENTITY, PLAY_OUT_SPAWN_NAMED_ENTITY, PLAY_OUT_ENTITY_EFFECT, PLAY_OUT_ENTITY_EFFECT_REMOVE, PLAY_OUT_ENTITY_METADATA, PLAY_OUT_ENTITY_EQUIPMENT, PLAY_OUT_ENTITY_HEAD_ROTATION, PLAY_OUT_ENTITY_LOOK, PLAY_OUT_ENTITY_TELEPORT, PLAY_OUT_ENTITY_REL_MOVE_LOOK),
+
         // scoreboard objectives
         PLAY_OUT_SCOREBOARD_OBJ, PLAY_OUT_SCOREBOARD_DISPLAY_OBJ,
 
         // play out
-        PLAY_OUT(PLAY_OUT_TABLIST, PLAY_OUT_SIDEBOARD, PLAY_OUT_CHAT, PLAY_OUT_SPAWN_ENTITY_LIVING, PLAY_OUT_DESTROY_ENTITY, PLAY_OUT_SPAWN_NAMED_ENTITY, PLAY_OUT_ENTITY_EFFECT, PLAY_OUT_ENTITY_EFFECT_REMOVE, PLAY_OUT_ENTITY_METADATA, PLAY_OUT_ENTITY_EQUIPMENT, PLAY_OUT_ENTITY_HEAD_ROTATION, PLAY_OUT_ENTITY_LOOK, PLAY_OUT_WORLD_BORDER, PLAY_OUT_SCOREBOARD_OBJ, PLAY_OUT_SCOREBOARD_DISPLAY_OBJ, PLAY_OUT_OPEN_BOOK, PLAY_OUT_ENTITY_TELEPORT, PLAY_OUT_ENTITY_REL_MOVE_LOOK),
+        PLAY_OUT(PLAY_OUT_TABLIST, PLAY_OUT_SIDEBOARD, PLAY_OUT_CHAT, PLAY_OUT_WORLD_BORDER, PLAY_OUT_SCOREBOARD_OBJ, PLAY_OUT_SCOREBOARD_DISPLAY_OBJ, PLAY_OUT_OPEN_BOOK, PLAY_OUT_ENTITY),
 
 
         PLAY_IN_USE_ENTITY, PLAY_IN_ARM_ANIMATION,
@@ -53,8 +70,33 @@ public interface ExPacket {
 
         private final Collection<Type> subTypes;
 
+        private final Class<? extends ExPacket> exPacketClass;
+        private final Class<? extends Packet<?>> packetClass;
+
         Type(Type... subTypes) {
             this.subTypes = Arrays.asList(subTypes.clone());
+            this.exPacketClass = null;
+            this.packetClass = null;
+        }
+
+        Type(Class<? extends ExPacket> exPacketClass, Class<? extends Packet<?>> packetClass, Type... subTypes) {
+            this.subTypes = Arrays.asList(subTypes.clone());
+            this.exPacketClass = exPacketClass;
+            this.packetClass = packetClass;
+        }
+
+        Type(Class<? extends ExPacket> exPacketClass, Class<? extends Packet<?>> packetClass) {
+            this.subTypes = new ArrayList<>();
+            this.exPacketClass = exPacketClass;
+            this.packetClass = packetClass;
+        }
+
+        public Class<? extends ExPacket> getExPacketClass() {
+            return exPacketClass;
+        }
+
+        public Class<? extends Packet<?>> getPacketClass() {
+            return packetClass;
         }
 
         public boolean isInstanceOf(Type type) {

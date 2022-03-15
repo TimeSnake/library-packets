@@ -1,11 +1,10 @@
 package de.timesnake.basic.packets.util;
 
 import de.timesnake.basic.packets.core.BukkitNmsParser;
+import de.timesnake.basic.packets.core.ListenerManager;
 import de.timesnake.basic.packets.core.UnsupportedPacketException;
 import de.timesnake.basic.packets.util.listener.PacketPlayInListener;
-import de.timesnake.basic.packets.util.listener.PacketPlayInModifyListener;
 import de.timesnake.basic.packets.util.listener.PacketPlayOutListener;
-import de.timesnake.basic.packets.util.listener.PacketPlayOutModifyListener;
 import de.timesnake.basic.packets.util.packet.ExPacket;
 import de.timesnake.basic.packets.util.packet.ExPacketPlayIn;
 import de.timesnake.basic.packets.util.packet.ExPacketPlayOut;
@@ -23,10 +22,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.logging.Level;
 
 public class PacketManager implements Listener {
@@ -35,34 +31,33 @@ public class PacketManager implements Listener {
 
     private boolean broadcast = false;
 
-    private final Map<ExPacket.Type, Collection<PacketPlayOutModifyListener>> playOutModifyListeners = new HashMap<>();
-    private final Map<ExPacket.Type, Collection<PacketPlayInModifyListener>> playInModifyListeners = new HashMap<>();
-
-    private final Map<ExPacket.Type, Collection<PacketPlayOutListener>> playOutListeners = new HashMap<>();
-    private final Map<ExPacket.Type, Collection<PacketPlayInListener>> playInListeners = new HashMap<>();
+    private final ListenerManager listenerManager;
 
     public PacketManager(Plugin plugin) {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(this, plugin);
 
+        this.listenerManager = new ListenerManager();
+
         Bukkit.getLogger().log(Level.INFO, "[Packets] Loaded manager successfully");
     }
 
-    public void addPacketPlayOutListener(ExPacket.Type packetType, PacketPlayOutModifyListener listener) {
-        this.playOutModifyListeners.computeIfAbsent(packetType, (t) -> new HashSet<>()).add(listener);
+    public void addListener(PacketPlayOutListener listener) {
+        this.listenerManager.addListener(listener);
     }
 
-    public void addPacketPlayInListener(ExPacket.Type packetType, PacketPlayInModifyListener listener) {
-        this.playInModifyListeners.computeIfAbsent(packetType, (t) -> new HashSet<>()).add(listener);
+    public void addListener(PacketPlayInListener listener) {
+        this.listenerManager.addListener(listener);
     }
 
-    public void addPacketPlayOutListener(ExPacket.Type packetType, PacketPlayOutListener listener) {
-        this.playOutListeners.computeIfAbsent(packetType, (t) -> new HashSet<>()).add(listener);
+    public void removeListener(PacketPlayOutListener listener, ExPacket.Type... types) {
+        this.listenerManager.removeListener(listener, types);
     }
 
-    public void addPacketPlayInListener(ExPacket.Type packetType, PacketPlayInListener listener) {
-        this.playInListeners.computeIfAbsent(packetType, (t) -> new HashSet<>()).add(listener);
+    public void removeListener(PacketPlayInListener listener, ExPacket.Type... types) {
+        this.listenerManager.removeListener(listener, types);
     }
+
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -121,50 +116,13 @@ public class PacketManager implements Listener {
                 return;
             }
 
-            final ExPacketPlayIn exPacket = packetPlayIn;
+            packetPlayIn = PacketManager.this.listenerManager.handlePacket(packetPlayIn, player);
 
-            if (playInListeners.containsKey(packetPlayIn.getType())) {
-                new Thread(() -> {
-                    for (Map.Entry<ExPacket.Type, Collection<PacketPlayInListener>> entryList : PacketManager.this.playInListeners.entrySet()) {
-                        if (entryList.getKey().containsSubType(exPacket.getType())) {
-                            for (PacketPlayInListener listener : entryList.getValue()) {
-                                listener.onPacketPlayIn(exPacket, player);
-                            }
-                        }
-                    }
-                }).start();
-            }
-
-
-            if (!playInModifyListeners.containsKey(packetPlayIn.getType())) {
-                super.channelRead(channelHandlerContext, packet);
+            if (packetPlayIn == null) {
                 return;
             }
 
-            boolean block = false;
-
-            for (Map.Entry<ExPacket.Type, Collection<PacketPlayInModifyListener>> entryList : PacketManager.this.playInModifyListeners.entrySet()) {
-                if (entryList.getKey().containsSubType(packetPlayIn.getType())) {
-                    for (PacketPlayInModifyListener listener : entryList.getValue()) {
-                        ExPacketPlayIn editedPacket = listener.onPacketPlayIn(packetPlayIn, player);
-                        if (editedPacket == null) {
-                            block = true;
-                        } else {
-                            packetPlayIn = editedPacket;
-                        }
-                    }
-                }
-            }
-
-            if (block) {
-                return;
-            }
-
-            if (packetPlayIn != null) {
-                super.channelRead(channelHandlerContext, packetPlayIn.getPacket());
-            } else {
-                super.channelRead(channelHandlerContext, packet);
-            }
+            super.channelRead(channelHandlerContext, packet);
         }
 
         @Override
@@ -199,50 +157,13 @@ public class PacketManager implements Listener {
                 return;
             }
 
+            packetPlayOut = PacketManager.this.listenerManager.handlePacket(packetPlayOut, player);
 
-
-            /*
-            if (de.timesnake.basic.packets.util.packet.ExPacket.Type.PLAY_OUT_TABLIST.containsSubType(packetPlayOut.getType())) {
-                Bukkit.getLogger().log(Level.INFO, "Send " + packetPlayOut.getInfo() + " " + packetPlayOut.getType() + " to " + this.player.getName());
-            }
-
-             */
-
-            final ExPacketPlayOut exPacket = packetPlayOut;
-
-            new Thread(() -> {
-                for (Map.Entry<ExPacket.Type, Collection<PacketPlayOutListener>> entryList : PacketManager.this.playOutListeners.entrySet()) {
-                    if (entryList.getKey().containsSubType(exPacket.getType())) {
-                        for (PacketPlayOutListener listener : entryList.getValue()) {
-                            listener.onPacketPlayOut(exPacket, player);
-                        }
-                    }
-                }
-            }).start();
-
-            boolean block = false;
-            for (Map.Entry<ExPacket.Type, Collection<PacketPlayOutModifyListener>> entryList : PacketManager.this.playOutModifyListeners.entrySet()) {
-                if (entryList.getKey().containsSubType(packetPlayOut.getType())) {
-                    for (PacketPlayOutModifyListener listener : entryList.getValue()) {
-                        ExPacketPlayOut editedPacket = listener.onPacketPlayOut(packetPlayOut, player);
-                        if (editedPacket == null) {
-                            block = true;
-                        } else {
-                            packetPlayOut = editedPacket;
-                        }
-                    }
-                }
-            }
-
-            if (block) {
+            if (packetPlayOut == null) {
                 return;
             }
 
-            if (packetPlayOut != null) {
-                super.write(channelHandlerContext, packetPlayOut.getPacket(), channelPromise);
-            } else {
-                super.write(channelHandlerContext, packet, channelPromise);
-            }
+            super.write(channelHandlerContext, packet, channelPromise);
         }
     }
 
