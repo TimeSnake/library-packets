@@ -43,15 +43,7 @@ public class ListenerManager {
                             throw new InconsistentPacketListenerException("invalid parameter-types");
                         }
 
-                        Set<Method> listenerMethods;
-
-                        if (annotation.modify()) {
-                            listenerMethods = this.modifyPlayOutListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener, k -> new HashSet<>());
-                        } else {
-                            listenerMethods = this.playOutListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener, k -> new HashSet<>());
-                        }
-
-                        this.addMethod(listenerMethods, method, type);
+                        this.addMethod(listener, method, type, annotation.modify());
                     }
                 }
             }
@@ -60,6 +52,22 @@ public class ListenerManager {
 
 
         } while (clazz != null && PacketPlayOutListener.class.isAssignableFrom(clazz));
+    }
+
+    private void addMethod(PacketPlayOutListener listener, Method method, ExPacket.Type type, boolean modify) {
+        if (!type.hasSubTypes()) {
+            if (modify) {
+                this.modifyPlayOutListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener, k -> new HashSet<>()).add(method);
+            } else {
+                this.playOutListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener,
+                        k -> new HashSet<>()).add(method);
+            }
+            return;
+        }
+
+        for (ExPacket.Type subType : type.getSubTypes()) {
+            this.addMethod(listener, method, subType, modify);
+        }
     }
 
     public void addListener(PacketPlayInListener listener) {
@@ -83,15 +91,7 @@ public class ListenerManager {
                             throw new InconsistentPacketListenerException("invalid parameter-types");
                         }
 
-                        Set<Method> listenerMethods;
-
-                        if (annotation.modify()) {
-                            listenerMethods = this.modifyPlayInListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener, k -> new HashSet<>());
-                        } else {
-                            listenerMethods = this.playInListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener, k -> new HashSet<>());
-                        }
-
-                        this.addMethod(listenerMethods, method, type);
+                        this.addMethod(listener, method, type, annotation.modify());
                     }
                 }
             }
@@ -102,14 +102,19 @@ public class ListenerManager {
         } while (clazz != null && PacketPlayOutListener.class.isAssignableFrom(clazz));
     }
 
-    private void addMethod(Set<Method> listenerMethods, Method method, ExPacket.Type type) {
+    private void addMethod(PacketPlayInListener listener, Method method, ExPacket.Type type, boolean modify) {
         if (!type.hasSubTypes()) {
-            listenerMethods.add(method);
+            if (modify) {
+                this.modifyPlayInListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener, k -> new HashSet<>()).add(method);
+            } else {
+                this.playInListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener,
+                        k -> new HashSet<>()).add(method);
+            }
             return;
         }
 
         for (ExPacket.Type subType : type.getSubTypes()) {
-            this.addMethod(listenerMethods, method, subType);
+            this.addMethod(listener, method, subType, modify);
         }
     }
 
@@ -152,7 +157,7 @@ public class ListenerManager {
 
         boolean block = false;
 
-        Set<Map.Entry<PacketPlayOutListener, Set<Method>>> set = this.playOutListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
+        Set<Map.Entry<PacketPlayOutListener, Set<Method>>> set = this.modifyPlayOutListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
 
         for (Map.Entry<PacketPlayOutListener, Set<Method>> subSet : set) {
             PacketPlayOutListener listener = subSet.getKey();
@@ -195,7 +200,7 @@ public class ListenerManager {
 
         boolean block = false;
 
-        Set<Map.Entry<PacketPlayInListener, Set<Method>>> set = this.playInListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
+        Set<Map.Entry<PacketPlayInListener, Set<Method>>> set = this.modifyPlayInListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
 
         for (Map.Entry<PacketPlayInListener, Set<Method>> subSet : set) {
             PacketPlayInListener listener = subSet.getKey();

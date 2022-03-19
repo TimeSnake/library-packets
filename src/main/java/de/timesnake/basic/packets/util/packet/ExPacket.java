@@ -1,10 +1,6 @@
 package de.timesnake.basic.packets.util.packet;
 
-import de.timesnake.basic.packets.core.packet.out.scoreboard.ExPacketPlayOutTablistPlayer;
-import de.timesnake.basic.packets.core.packet.out.scoreboard.ExPacketPlayOutTablistPlayerAdd;
-import de.timesnake.basic.packets.core.packet.out.scoreboard.ExPacketPlayOutTablistPlayerRemove;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.PacketPlayOutPlayerInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,14 +21,16 @@ public interface ExPacket {
     enum Type {
 
         // tablist player
-        PLAY_OUT_TABLIST_PLAYER_ADD(ExPacketPlayOutTablistPlayerAdd.class, PacketPlayOutPlayerInfo.class), PLAY_OUT_TABLIST_PLAYER_REMOVE(ExPacketPlayOutTablistPlayerRemove.class, PacketPlayOutPlayerInfo.class),
+        PLAY_OUT_TABLIST_PLAYER_ADD, PLAY_OUT_TABLIST_PLAYER_REMOVE,
 
-        PLAY_OUT_TABLIST_PLAYER(ExPacketPlayOutTablistPlayer.class, PacketPlayOutPlayerInfo.class, PLAY_OUT_TABLIST_PLAYER_ADD, PLAY_OUT_TABLIST_PLAYER_REMOVE),
+        PLAY_OUT_TABLIST_PLAYER(PLAY_OUT_TABLIST_PLAYER_ADD, PLAY_OUT_TABLIST_PLAYER_REMOVE),
 
         // tablist team
-        PLAY_OUT_TABLIST_TEAM_CREATION, PLAY_OUT_TABLIST_TEAM_UPDATE, PLAY_OUT_TABLIST_TEAM_PLAYER_ADD, PLAY_OUT_TABLIST_TEAM_PLAYER_REMOVE, PLAY_OUT_TABLIST_TEAM_REMOVE,
+        PLAY_OUT_TABLIST_TEAM_CREATION, PLAY_OUT_TABLIST_TEAM_UPDATE, PLAY_OUT_TABLIST_TEAM_PLAYER_ADD,
+        PLAY_OUT_TABLIST_TEAM_PLAYER_REMOVE, PLAY_OUT_TABLIST_TEAM_REMOVE,
 
-        PLAY_OUT_TABLIST_TEAM(PLAY_OUT_TABLIST_TEAM_CREATION, PLAY_OUT_TABLIST_TEAM_UPDATE, PLAY_OUT_TABLIST_TEAM_PLAYER_ADD, PLAY_OUT_TABLIST_TEAM_PLAYER_REMOVE, PLAY_OUT_TABLIST_TEAM_REMOVE),
+        PLAY_OUT_TABLIST_TEAM(PLAY_OUT_TABLIST_TEAM_CREATION, PLAY_OUT_TABLIST_TEAM_UPDATE,
+                PLAY_OUT_TABLIST_TEAM_PLAYER_ADD, PLAY_OUT_TABLIST_TEAM_PLAYER_REMOVE, PLAY_OUT_TABLIST_TEAM_REMOVE),
 
         // tablist header footer
         PLAY_OUT_TABLIST_HEADER_FOOTER,
