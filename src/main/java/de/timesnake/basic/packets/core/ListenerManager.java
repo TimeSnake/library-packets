@@ -138,9 +138,15 @@ public class ListenerManager {
 
     public ExPacketPlayOut handlePacket(ExPacketPlayOut packet, Player receiver) {
 
+        if (packet == null || packet.getType() == null) {
+            return packet;
+        }
+
         ExPacketPlayOut finalPacket = packet;
+
         new Thread(() -> {
-            Set<Map.Entry<PacketPlayOutListener, Set<Method>>> set = this.playOutListeners.getOrDefault(finalPacket.getType(), new ConcurrentHashMap<>()).entrySet();
+            Set<Map.Entry<PacketPlayOutListener, Set<Method>>> set =
+                    this.playOutListeners.getOrDefault(finalPacket.getType(), new ConcurrentHashMap<>()).entrySet();
 
             for (Map.Entry<PacketPlayOutListener, Set<Method>> subSet : set) {
                 PacketPlayOutListener listener = subSet.getKey();
@@ -181,9 +187,14 @@ public class ListenerManager {
 
     public ExPacketPlayIn handlePacket(ExPacketPlayIn packet, Player sender) {
 
+        if (packet == null || packet.getType() == null) {
+            return packet;
+        }
+
         ExPacketPlayIn finalPacket = packet;
         new Thread(() -> {
-            Set<Map.Entry<PacketPlayInListener, Set<Method>>> set = this.playInListeners.getOrDefault(finalPacket.getType(), new ConcurrentHashMap<>()).entrySet();
+            Set<Map.Entry<PacketPlayInListener, Set<Method>>> set =
+                    this.playInListeners.getOrDefault(finalPacket.getType(), new ConcurrentHashMap<>()).entrySet();
 
             for (Map.Entry<PacketPlayInListener, Set<Method>> subSet : set) {
                 PacketPlayInListener listener = subSet.getKey();
