@@ -122,7 +122,7 @@ public class PacketManager implements Listener {
                 return;
             }
 
-            super.channelRead(channelHandlerContext, packet);
+            super.channelRead(channelHandlerContext, packetPlayIn.getPacket());
         }
 
         @Override
@@ -163,7 +163,7 @@ public class PacketManager implements Listener {
                 return;
             }
 
-            super.write(channelHandlerContext, packet, channelPromise);
+            super.write(channelHandlerContext, packetPlayOut.getPacket(), channelPromise);
         }
     }
 
