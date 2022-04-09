@@ -6,10 +6,7 @@ import de.timesnake.basic.packets.core.packet.out.border.ExClientboundInitialize
 import de.timesnake.basic.packets.core.packet.out.border.ExClientboundSetBorderCenterPacket;
 import de.timesnake.basic.packets.core.packet.out.border.ExClientboundSetBorderLerpSizePacket;
 import de.timesnake.basic.packets.core.packet.out.border.ExClientboundSetBorderSizePacket;
-import de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityEquipment;
-import de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation;
-import de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityLook;
-import de.timesnake.basic.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata;
+import de.timesnake.basic.packets.core.packet.out.entity.*;
 import de.timesnake.basic.packets.core.packet.out.scoreboard.*;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.protocol.Packet;
@@ -57,6 +54,8 @@ public abstract class ExPacketPlayOut extends ExPacket implements de.timesnake.b
             return new ExClientboundSetBorderLerpSizePacket(((ClientboundSetBorderLerpSizePacket) packet));
         } else if (packet instanceof ClientboundInitializeBorderPacket) {
             return new ExClientboundInitializeBorderPacket(((ClientboundInitializeBorderPacket) packet));
+        } else if (packet instanceof PacketPlayOutSpawnEntity) {
+            return new ExPacketPlayOutSpawnEntity(((PacketPlayOutSpawnEntity) packet));
         }
         throw new UnsupportedPacketException(packet);
     }
