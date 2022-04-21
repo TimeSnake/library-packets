@@ -3,7 +3,7 @@ package de.timesnake.basic.packets.core.packet.out.entity;
 import de.timesnake.basic.entities.entity.bukkit.ExPlayer;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
 import net.minecraft.network.protocol.game.PacketPlayOutNamedEntitySpawn;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class ExPacketPlayOutSpawnNamedEntity extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutSpawnNamedEntity {

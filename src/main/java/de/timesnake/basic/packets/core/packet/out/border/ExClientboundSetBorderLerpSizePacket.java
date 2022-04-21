@@ -3,7 +3,7 @@ package de.timesnake.basic.packets.core.packet.out.border;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
 import net.minecraft.network.protocol.game.ClientboundSetBorderLerpSizePacket;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
 
 public class ExClientboundSetBorderLerpSizePacket extends ExPacketPlayOut implements de.timesnake.basic.packets.util.ExClientboundSetBorderLerpSizePacket {
 

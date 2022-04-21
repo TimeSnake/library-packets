@@ -99,7 +99,7 @@ public class ListenerManager {
             clazz = clazz.getSuperclass();
 
 
-        } while (clazz != null && PacketPlayOutListener.class.isAssignableFrom(clazz));
+        } while (clazz != null && PacketPlayInListener.class.isAssignableFrom(clazz));
     }
 
     private void addMethod(PacketPlayInListener listener, Method method, ExPacket.Type type, boolean modify) {
