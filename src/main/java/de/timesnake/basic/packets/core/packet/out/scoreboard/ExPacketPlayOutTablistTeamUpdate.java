@@ -5,7 +5,7 @@ import de.timesnake.library.reflection.RefUtil;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardTeam;
 import net.minecraft.world.scores.ScoreboardTeam;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_18_R1.util.CraftChatMessage;
+import org.bukkit.craftbukkit.v1_18_R2.util.CraftChatMessage;
 
 public class ExPacketPlayOutTablistTeamUpdate extends ExPacketPlayOutTablistTeam implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistTeamUpdate {
 
