@@ -1,10 +1,12 @@
 package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardTeam;
 import net.minecraft.world.scores.ScoreboardTeam;
 
 import javax.annotation.Nonnull;
 
+@NmsReflection
 public class ExPacketPlayOutTablistTeamPlayerAdd extends ExPacketPlayOutTablistTeam implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistTeamPlayerAdd {
 
     private final String entry;

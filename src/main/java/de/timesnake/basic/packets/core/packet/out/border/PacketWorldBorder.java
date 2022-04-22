@@ -1,8 +1,10 @@
 package de.timesnake.basic.packets.core.packet.out.border;
 
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.server.level.WorldServer;
 import net.minecraft.world.level.border.WorldBorder;
 
+@NmsReflection
 public class PacketWorldBorder extends WorldBorder {
 
     public static PacketWorldBorder init(WorldServer worldServer, double centerX, double centerZ, double newSize, double oldSize, long time, int warningDistance, int warningTime) {

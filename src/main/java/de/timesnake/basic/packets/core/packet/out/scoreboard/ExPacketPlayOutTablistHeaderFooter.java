@@ -1,9 +1,11 @@
 package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.PacketPlayOutPlayerListHeaderFooter;
 
+@NmsReflection
 public class ExPacketPlayOutTablistHeaderFooter extends ExPacketPlayOutTablist implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistHeaderFooter {
 
     private final String header;

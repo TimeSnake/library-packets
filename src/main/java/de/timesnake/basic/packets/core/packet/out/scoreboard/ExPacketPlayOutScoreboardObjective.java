@@ -1,14 +1,14 @@
 package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.basic.util.NmsReflection;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.chat.ChatComponentText;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardObjective;
 import net.minecraft.world.scores.ScoreboardObjective;
 
+@NmsReflection
 public class ExPacketPlayOutScoreboardObjective extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutScoreboardObjective {
 
-    @NmsReflection
     private final String name;
     private Display display;
 
@@ -17,7 +17,8 @@ public class ExPacketPlayOutScoreboardObjective extends ExPacketPlayOut implemen
         this.name = packet.b();
     }
 
-    public ExPacketPlayOutScoreboardObjective(String name, String title, Display display, ExPacketPlayOutScoreboardObjective.ScoreboardType type) {
+    public ExPacketPlayOutScoreboardObjective(String name, String title, Display display,
+                                              ExPacketPlayOutScoreboardObjective.ScoreboardType type) {
         ScoreboardObjective sb = new PacketScoreboardObjective(name, new ChatComponentText(title), type.getType());
 
         super.packet = new PacketPlayOutScoreboardObjective(sb, display.getDisplay());

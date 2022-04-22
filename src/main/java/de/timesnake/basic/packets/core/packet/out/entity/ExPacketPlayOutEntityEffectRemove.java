@@ -1,10 +1,12 @@
 package de.timesnake.basic.packets.core.packet.out.entity;
 
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutRemoveEntityEffect;
 import net.minecraft.world.effect.MobEffectList;
 import org.bukkit.entity.Player;
 
+@NmsReflection
 public class ExPacketPlayOutEntityEffectRemove extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutEntityEffectRemove {
 
     public ExPacketPlayOutEntityEffectRemove(Player p, ExPacketPlayOutEntityEffect.Effect effect) {

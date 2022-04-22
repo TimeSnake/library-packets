@@ -1,7 +1,9 @@
 package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardScore;
 
+@NmsReflection
 public class ExPacketPlayOutSideboardScoreRemove extends ExPacketPlayOutSideboard implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutSideboardScoreRemove {
 
     public ExPacketPlayOutSideboardScoreRemove(String sideboardName, String text, int line) {

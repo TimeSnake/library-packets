@@ -2,13 +2,14 @@ package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
 import de.timesnake.basic.packets.core.UnsupportedPacketException;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.basic.util.NmsReflection;
+import de.timesnake.library.reflection.NmsReflection;
 import de.timesnake.library.reflection.RefUtil;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardScore;
 import net.minecraft.server.ScoreboardServer;
 
+@NmsReflection(usesReflection = true)
 public abstract class ExPacketPlayOutSideboard extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutSideboard {
 
     public enum Action {
@@ -64,10 +65,10 @@ public abstract class ExPacketPlayOutSideboard extends ExPacketPlayOut implement
     }
 
     public static ExPacketPlayOut getPacket(PacketPlayOutScoreboardScore packet) throws UnsupportedPacketException {
-        @NmsReflection ScoreboardServer.Action type = (ScoreboardServer.Action) RefUtil.getInstanceField(packet, "d");
-        @NmsReflection int line = (int) RefUtil.getInstanceField(packet, "c");
-        @NmsReflection String text = (String) RefUtil.getInstanceField(packet, "a");
-        @NmsReflection String scoreboardName = (String) RefUtil.getInstanceField(packet, "b");
+        ScoreboardServer.Action type = (ScoreboardServer.Action) RefUtil.getInstanceField(packet, "d");
+        int line = (int) RefUtil.getInstanceField(packet, "c");
+        String text = (String) RefUtil.getInstanceField(packet, "a");
+        String scoreboardName = (String) RefUtil.getInstanceField(packet, "b");
 
         if (type.equals(Action.CHANGE.getNms())) {
             return new ExPacketPlayOutSideboardScoreSet(scoreboardName, text, line);

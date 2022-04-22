@@ -2,10 +2,12 @@ package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
 import de.timesnake.basic.entities.entity.bukkit.ExPlayer;
 import de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablist;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutPlayerInfo;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+@NmsReflection
 public class ExPacketPlayOutTablistPlayerRemove extends ExPacketPlayOutTablistPlayer implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistPlayerRemove {
 
     public ExPacketPlayOutTablistPlayerRemove(ExPlayer entityPlayer) {

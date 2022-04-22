@@ -1,8 +1,10 @@
 package de.timesnake.basic.packets.core.packet.in;
 
+import de.timesnake.library.reflection.NmsReflection;
 import de.timesnake.library.reflection.wrapper.ExEnumHand;
 import net.minecraft.network.protocol.game.PacketPlayInArmAnimation;
 
+@NmsReflection
 public class ExPacketPlayInArmAnimation extends ExPacketPlayIn implements de.timesnake.basic.packets.util.packet.ExPacketPlayInArmAnimation {
 
     public ExPacketPlayInArmAnimation(PacketPlayInArmAnimation packet) {

@@ -1,13 +1,13 @@
 package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.basic.util.NmsReflection;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardDisplayObjective;
 import net.minecraft.world.scores.ScoreboardObjective;
 
+@NmsReflection
 public class ExPacketPlayOutScoreboardDisplayObjective extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutScoreboardDisplayObjective {
 
-    @NmsReflection
     private final String name;
 
     public ExPacketPlayOutScoreboardDisplayObjective(PacketPlayOutScoreboardDisplayObjective packet) {

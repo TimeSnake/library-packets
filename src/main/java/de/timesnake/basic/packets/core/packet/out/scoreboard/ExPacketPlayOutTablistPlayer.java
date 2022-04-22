@@ -2,7 +2,7 @@ package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
 import com.mojang.authlib.GameProfile;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.basic.util.NmsReflection;
+import de.timesnake.library.reflection.NmsReflection;
 import de.timesnake.library.reflection.RefUtil;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketListenerPlayOut;
@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+@NmsReflection(usesReflection = true)
 public abstract class ExPacketPlayOutTablistPlayer extends ExPacketPlayOutTablist implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistPlayer {
 
     public enum ExEnumPlayerInfoAction {
@@ -54,7 +55,8 @@ public abstract class ExPacketPlayOutTablistPlayer extends ExPacketPlayOutTablis
     }
 
     public static ExPacketPlayOut getPacket(PacketPlayOutPlayerInfo packet) {
-        @NmsReflection PacketPlayOutPlayerInfo.EnumPlayerInfoAction type = (PacketPlayOutPlayerInfo.EnumPlayerInfoAction) RefUtil.getInstanceField(packet, "a");
+        PacketPlayOutPlayerInfo.EnumPlayerInfoAction type =
+                (PacketPlayOutPlayerInfo.EnumPlayerInfoAction) RefUtil.getInstanceField(packet, "a");
 
         if (type.equals(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a)) {
             List<Player> players = getFieldPlayers(packet);
@@ -74,11 +76,11 @@ public abstract class ExPacketPlayOutTablistPlayer extends ExPacketPlayOutTablis
 
         List<Player> players = new ArrayList<>();
 
-        @NmsReflection List<?> list = (List<?>) RefUtil.getInstanceField(packet, "b");
+        List<?> list = (List<?>) RefUtil.getInstanceField(packet, "b");
 
         for (Object info : list) {
 
-            @NmsReflection GameProfile gameProfile = (GameProfile) RefUtil.getInstanceField(info, "c");
+            GameProfile gameProfile = (GameProfile) RefUtil.getInstanceField(info, "c");
 
             Player player = Bukkit.getPlayer(gameProfile.getId());
 
