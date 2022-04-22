@@ -104,10 +104,10 @@ public class PacketManager implements Listener {
             ExPacketPlayIn packetPlayIn = null;
             try {
                 packetPlayIn = de.timesnake.basic.packets.core.packet.in.ExPacketPlayIn.getPacket(((Packet<?>) packet));
-            } catch (UnsupportedPacketException e) {
-                PacketManager.this.broadcast(e.getMessage());
+            } catch (UnsupportedPacketException ignored) {
             } catch (Exception e) {
-                PacketManager.this.broadcast("Exception: " + e.getClass().getSimpleName() + " while " + "transforming play-in-packet");
+                PacketManager.this.broadcast("Exception: " + e.getClass().getSimpleName() + " while " + "transforming" +
+                        " play-in-packet");
             }
 
             if (packetPlayIn == null) {
@@ -143,11 +143,12 @@ public class PacketManager implements Listener {
                 packetPlayOut = sentPacketsByNMSPacket.get(packet);
             } else {
                 try {
-                    packetPlayOut = de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut.getPacket(((Packet<?>) packet));
-                } catch (UnsupportedPacketException e) {
-                    PacketManager.this.broadcast(e.getMessage());
+                    packetPlayOut =
+                            de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut.getPacket(((Packet<?>) packet));
+                } catch (UnsupportedPacketException ignored) {
                 } catch (Exception e) {
-                    PacketManager.this.broadcast("Exception: " + e.getClass().getSimpleName() + " while " + "transforming play-out-packet");
+                    PacketManager.this.broadcast("Exception: " + e.getClass().getSimpleName() + " while " +
+                            "transforming play-out-packet");
                 }
             }
 
