@@ -2,9 +2,11 @@ package de.timesnake.basic.packets.core.packet.out.entity;
 
 import de.timesnake.basic.entities.entity.extension.ExEntityLiving;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutEntity;
 import org.bukkit.entity.LivingEntity;
 
+@NmsReflection
 public class ExPacketPlayOutEntityRelMoveLook extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutEntityRelMoveLook {
 
     public ExPacketPlayOutEntityRelMoveLook(LivingEntity entity, double deltaX, double deltaY, double deltaZ, float yaw, float pitch, boolean onGround) {

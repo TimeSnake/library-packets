@@ -4,6 +4,7 @@ import de.timesnake.basic.entities.entity.bukkit.ExPlayer;
 import de.timesnake.basic.entities.entity.extension.EntityExtension;
 import de.timesnake.basic.entities.entity.extension.ExEntity;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
+import de.timesnake.library.reflection.NmsReflection;
 import de.timesnake.library.reflection.RefUtil;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityMetadata;
 import net.minecraft.network.syncher.DataWatcher;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+@NmsReflection
 public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutEntityMetadata {
 
     public static ExPacketPlayOutEntityMetadata getPacket(PacketPlayOutEntityMetadata packet) {

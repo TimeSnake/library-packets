@@ -1,10 +1,12 @@
 package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.chat.ChatComponentText;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.world.scores.ScoreboardObjective;
 import net.minecraft.world.scores.criteria.IScoreboardCriteria;
 
+@NmsReflection
 public class PacketScoreboardObjective extends ScoreboardObjective {
 
     public PacketScoreboardObjective(String name, IChatBaseComponent title, IScoreboardCriteria.EnumScoreboardHealthDisplay type) {

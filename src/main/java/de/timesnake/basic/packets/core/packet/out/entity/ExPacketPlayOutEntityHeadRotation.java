@@ -2,9 +2,11 @@ package de.timesnake.basic.packets.core.packet.out.entity;
 
 import de.timesnake.basic.entities.entity.extension.EntityExtension;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityHeadRotation;
 import net.minecraft.world.entity.Entity;
 
+@NmsReflection
 public class ExPacketPlayOutEntityHeadRotation extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutEntityHeadRotation {
 
     private int entityId;

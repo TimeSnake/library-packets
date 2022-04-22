@@ -1,11 +1,13 @@
 package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
 import de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablist;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutPlayerInfo;
 import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+@NmsReflection
 public class ExPacketPlayOutTablistPlayerAdd extends ExPacketPlayOutTablistPlayer implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistPlayerAdd {
 
     public ExPacketPlayOutTablistPlayerAdd(EntityPlayer entityPlayers) {

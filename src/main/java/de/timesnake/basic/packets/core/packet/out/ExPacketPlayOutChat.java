@@ -1,9 +1,11 @@
 package de.timesnake.basic.packets.core.packet.out;
 
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.chat.ChatMessageType;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.PacketPlayOutChat;
 
+@NmsReflection
 public class ExPacketPlayOutChat extends ExPacketPlayOut {
 
     private final Slot slot;

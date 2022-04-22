@@ -2,7 +2,7 @@ package de.timesnake.basic.packets.util.packet;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import de.timesnake.library.basic.util.NmsReflection;
+import de.timesnake.library.reflection.NmsReflection;
 import de.timesnake.library.reflection.RefUtil;
 import net.minecraft.network.chat.ChatComponentText;
 import net.minecraft.server.MinecraftServer;
@@ -14,6 +14,7 @@ import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
 
 import java.util.UUID;
 
+@NmsReflection
 public interface ExPacketPlayOutTablist extends ExPacketPlayOut {
 
     enum Head {
@@ -39,7 +40,6 @@ public interface ExPacketPlayOutTablist extends ExPacketPlayOut {
         }
     }
 
-    @NmsReflection
     static EntityPlayer newEntry(String name, Head head) {
         GameProfile profile = new GameProfile(UUID.randomUUID(), name.replace("§", ""));
         profile.getProperties().put("textures", new Property("textures", head.getValue(), head.getSignature()));

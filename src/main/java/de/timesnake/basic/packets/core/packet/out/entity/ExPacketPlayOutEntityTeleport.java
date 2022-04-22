@@ -2,12 +2,14 @@ package de.timesnake.basic.packets.core.packet.out.entity;
 
 import de.timesnake.basic.entities.entity.extension.ExEntityLiving;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityTeleport;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+@NmsReflection
 public class ExPacketPlayOutEntityTeleport extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutEntityTeleport {
 
     public ExPacketPlayOutEntityTeleport(Player player) {

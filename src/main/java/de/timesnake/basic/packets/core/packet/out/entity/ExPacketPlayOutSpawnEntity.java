@@ -2,10 +2,12 @@ package de.timesnake.basic.packets.core.packet.out.entity;
 
 import de.timesnake.basic.entities.entity.extension.ExEntity;
 import de.timesnake.basic.packets.core.packet.out.ExPacketPlayOut;
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutSpawnEntity;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 
+@NmsReflection
 public class ExPacketPlayOutSpawnEntity extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutSpawnEntity {
 
     public ExPacketPlayOutSpawnEntity(Entity entity) {

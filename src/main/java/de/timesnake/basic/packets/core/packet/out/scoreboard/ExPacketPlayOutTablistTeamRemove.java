@@ -1,8 +1,10 @@
 package de.timesnake.basic.packets.core.packet.out.scoreboard;
 
+import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardTeam;
 import net.minecraft.world.scores.ScoreboardTeam;
 
+@NmsReflection
 public class ExPacketPlayOutTablistTeamRemove extends ExPacketPlayOutTablistTeam implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistTeamRemove {
 
     public ExPacketPlayOutTablistTeamRemove(String name) {

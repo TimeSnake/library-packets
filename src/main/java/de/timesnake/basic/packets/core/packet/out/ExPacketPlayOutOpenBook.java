@@ -1,8 +1,10 @@
 package de.timesnake.basic.packets.core.packet.out;
 
+import de.timesnake.library.reflection.NmsReflection;
 import de.timesnake.library.reflection.wrapper.ExEnumHand;
 import net.minecraft.network.protocol.game.PacketPlayOutOpenBook;
 
+@NmsReflection
 public class ExPacketPlayOutOpenBook extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutOpenBook {
 
     public ExPacketPlayOutOpenBook(PacketPlayOutOpenBook packet) {
