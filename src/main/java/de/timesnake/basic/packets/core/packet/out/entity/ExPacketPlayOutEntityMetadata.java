@@ -26,10 +26,9 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
     }
 
     public ExPacketPlayOutEntityMetadata(Player player, DataType type) {
-        switch (type) {
-            case UPDATE:
-                super.packet = new PacketPlayOutEntityMetadata(player.getEntityId(), new ExPlayer(player).getDataWatcher(), true);
-                break;
+        if (type == DataType.UPDATE) {
+            super.packet = new PacketPlayOutEntityMetadata(player.getEntityId(),
+                    new ExPlayer(player).getDataWatcher(), true);
         }
     }
 
@@ -37,11 +36,19 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         this(entity.getExtension(), type);
     }
 
+    public ExPacketPlayOutEntityMetadata(EntityExtension<?> entity, DataType type, boolean flag) {
+        this(entity.getExtension(), type, flag);
+    }
+
     public ExPacketPlayOutEntityMetadata(ExEntity entity, DataType type) {
-        switch (type) {
-            case UPDATE:
-                super.packet = new PacketPlayOutEntityMetadata(entity.getId(), entity.getDataWatcher(), true);
-                break;
+        if (type == DataType.UPDATE) {
+            super.packet = new PacketPlayOutEntityMetadata(entity.getId(), entity.getDataWatcher(), true);
+        }
+    }
+
+    public ExPacketPlayOutEntityMetadata(ExEntity entity, DataType type, boolean flag) {
+        if (type == DataType.UPDATE) {
+            super.packet = new PacketPlayOutEntityMetadata(entity.getId(), entity.getDataWatcher(), flag);
         }
     }
 
