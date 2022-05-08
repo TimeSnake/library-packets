@@ -56,6 +56,12 @@ public abstract class ExPacketPlayOut extends ExPacket implements de.timesnake.b
             return new ExClientboundInitializeBorderPacket(((ClientboundInitializeBorderPacket) packet));
         } else if (packet instanceof PacketPlayOutSpawnEntity) {
             return new ExPacketPlayOutSpawnEntity(((PacketPlayOutSpawnEntity) packet));
+        } else if (packet instanceof PacketPlayOutMap) {
+            return new ExPacketPlayOutMap((PacketPlayOutMap) packet);
+        } else if (packet instanceof ClientboundLevelChunkWithLightPacket) {
+            return new ExClientboundLevelChunkWithLightPacket(((ClientboundLevelChunkWithLightPacket) packet));
+        } else if (packet instanceof PacketPlayOutUnloadChunk) {
+            return new ExPacketPlayOutChunkUnload(((PacketPlayOutUnloadChunk) packet));
         }
         throw new UnsupportedPacketException(packet);
     }

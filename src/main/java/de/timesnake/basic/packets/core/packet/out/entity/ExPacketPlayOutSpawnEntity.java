@@ -18,6 +18,22 @@ public class ExPacketPlayOutSpawnEntity extends ExPacketPlayOut implements de.ti
         super(new PacketPlayOutSpawnEntity(entity.getNMS()));
     }
 
+    public ExPacketPlayOutSpawnEntity(Entity entity, int data) {
+        super(new PacketPlayOutSpawnEntity(((CraftEntity) entity).getHandle(), data));
+    }
+
+    public ExPacketPlayOutSpawnEntity(ExEntity entity, int data) {
+        super(new PacketPlayOutSpawnEntity(entity.getNMS(), data));
+    }
+
+    public ExPacketPlayOutSpawnEntity(Entity entity, ItemFrameRotation rotation) {
+        super(new PacketPlayOutSpawnEntity(((CraftEntity) entity).getHandle(), rotation.getNms()));
+    }
+
+    public ExPacketPlayOutSpawnEntity(ExEntity entity, ItemFrameRotation rotation) {
+        super(new PacketPlayOutSpawnEntity(entity.getNMS(), rotation.getNms()));
+    }
+
     public ExPacketPlayOutSpawnEntity(PacketPlayOutSpawnEntity packet) {
         super(packet);
     }
