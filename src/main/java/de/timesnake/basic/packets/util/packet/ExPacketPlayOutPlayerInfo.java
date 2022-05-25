@@ -15,7 +15,11 @@ public interface ExPacketPlayOutPlayerInfo extends ExPacketPlayOut {
     }
 
     enum Action {
-        ADD_PLAYER(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a), UPDATE_GAME_MODE(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.b), UPDATE_LATENCY(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.c), UPDATE_DISPLAY_NAME(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.d), REMOVE_PLAYER(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.e);
+        ADD_PLAYER(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a),
+        UPDATE_GAME_MODE(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.b),
+        UPDATE_LATENCY(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.c),
+        UPDATE_DISPLAY_NAME(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.d),
+        REMOVE_PLAYER(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.e);
 
         private final PacketPlayOutPlayerInfo.EnumPlayerInfoAction action;
 

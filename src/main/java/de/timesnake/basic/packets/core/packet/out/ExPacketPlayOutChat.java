@@ -32,12 +32,9 @@ public class ExPacketPlayOutChat extends ExPacketPlayOut {
 
 
         // TODO 1.18 check uuid
-        this.packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + text + "\",\"color\":\"white\"}"), type, null);
+        this.packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + text + "\",\"color" +
+                "\":\"white\"}"), type, null);
 
-    }
-
-    public enum Slot {
-        CHAT, GAME_INFO, SYSTEM
     }
 
     @Override
@@ -48,5 +45,11 @@ public class ExPacketPlayOutChat extends ExPacketPlayOut {
     @Override
     public Type getType() {
         return null;
+    }
+
+    public enum Slot {
+        CHAT,
+        GAME_INFO,
+        SYSTEM
     }
 }

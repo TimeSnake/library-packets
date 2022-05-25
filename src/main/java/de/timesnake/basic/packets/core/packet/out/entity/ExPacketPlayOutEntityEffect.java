@@ -10,9 +10,11 @@ import org.bukkit.entity.Player;
 @NmsReflection
 public class ExPacketPlayOutEntityEffect extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutEntityEffect {
 
-    public ExPacketPlayOutEntityEffect(Player p, Effect effect, byte amplifier, int duration, boolean ambient, boolean showParticles, boolean showIcon) {
+    public ExPacketPlayOutEntityEffect(Player p, Effect effect, byte amplifier, int duration, boolean ambient,
+                                       boolean showParticles, boolean showIcon) {
 
-        MobEffect mobEffect = new MobEffect(MobEffectList.a(effect.getId()), amplifier, duration, ambient, showParticles, showIcon);
+        MobEffect mobEffect = new MobEffect(MobEffectList.a(effect.getId()), amplifier, duration, ambient,
+                showParticles, showIcon);
         super.packet = new PacketPlayOutEntityEffect(p.getEntityId(), mobEffect);
     }
 

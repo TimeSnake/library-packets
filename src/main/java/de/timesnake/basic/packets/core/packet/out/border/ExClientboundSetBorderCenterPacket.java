@@ -14,7 +14,8 @@ public class ExClientboundSetBorderCenterPacket extends ExPacketPlayOut implemen
     }
 
     public ExClientboundSetBorderCenterPacket(World world, double centerX, double centerZ) {
-        super(new ClientboundSetBorderCenterPacket(PacketWorldBorder.center(((CraftWorld) world).getHandle(), centerX, centerZ)));
+        super(new ClientboundSetBorderCenterPacket(PacketWorldBorder.center(((CraftWorld) world).getHandle(), centerX
+                , centerZ)));
     }
 
     @Override

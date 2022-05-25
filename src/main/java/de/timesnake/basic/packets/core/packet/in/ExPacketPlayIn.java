@@ -20,8 +20,7 @@ public abstract class ExPacketPlayIn extends ExPacket implements de.timesnake.ba
     public static ExPacketPlayIn getPacket(Packet<? extends PacketListener> packet) throws UnsupportedPacketException {
         if (packet instanceof PacketPlayInUseEntity) {
             return new ExPacketPlayInUseEntity(((PacketPlayInUseEntity) packet));
-        }
-        else if(packet instanceof PacketPlayInArmAnimation) {
+        } else if (packet instanceof PacketPlayInArmAnimation) {
             return new ExPacketPlayInArmAnimation((PacketPlayInArmAnimation) packet);
         }
         throw new UnsupportedPacketException(packet);

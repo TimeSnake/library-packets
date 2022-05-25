@@ -7,8 +7,27 @@ import net.minecraft.world.level.border.WorldBorder;
 @NmsReflection
 public class PacketWorldBorder extends WorldBorder {
 
-    public static PacketWorldBorder init(WorldServer worldServer, double centerX, double centerZ, double newSize, double oldSize, long time, int warningDistance, int warningTime) {
-        return new PacketWorldBorder(worldServer, centerX, centerZ, newSize, oldSize, time, warningDistance, warningTime);
+    private final double centerX;
+    private final double centerZ;
+    private final double newSize;
+    private final double oldSize;
+    private final long time;
+    //private final int f;
+    private final int warningDistance;
+    private final int warningTime;
+
+    public PacketWorldBorder(WorldServer worldServer, double centerX, double centerZ, double newSize, double oldSize,
+                             long time, int warningDistance, int warningTime) {
+        this.centerX = centerX;
+        this.centerZ = centerZ;
+        this.newSize = newSize;
+        this.oldSize = oldSize;
+        this.time = time;
+        //this.f = super.k;
+        this.warningDistance = warningDistance;
+        this.warningTime = warningTime;
+
+        this.world = worldServer;
     }
 
     public static PacketWorldBorder lerp(WorldServer worldServer, double newSize, double oldSize, long time) {
@@ -23,27 +42,10 @@ public class PacketWorldBorder extends WorldBorder {
         return new PacketWorldBorder(worldServer, 0, 0, size, size, 0, 0, 0);
     }
 
-    private final double centerX;
-    private final double centerZ;
-    private final double newSize;
-    private final double oldSize;
-    private final long time;
-    //private final int f;
-    private final int warningDistance;
-    private final int warningTime;
-
-
-    public PacketWorldBorder(WorldServer worldServer, double centerX, double centerZ, double newSize, double oldSize, long time, int warningDistance, int warningTime) {
-        this.centerX = centerX;
-        this.centerZ = centerZ;
-        this.newSize = newSize;
-        this.oldSize = oldSize;
-        this.time = time;
-        //this.f = super.k;
-        this.warningDistance = warningDistance;
-        this.warningTime = warningTime;
-
-        this.world = worldServer;
+    public static PacketWorldBorder init(WorldServer worldServer, double centerX, double centerZ, double newSize,
+                                         double oldSize, long time, int warningDistance, int warningTime) {
+        return new PacketWorldBorder(worldServer, centerX, centerZ, newSize, oldSize, time, warningDistance,
+                warningTime);
     }
 
     @Override

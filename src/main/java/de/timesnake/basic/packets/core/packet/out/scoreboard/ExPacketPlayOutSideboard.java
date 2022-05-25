@@ -12,26 +12,12 @@ import net.minecraft.server.ScoreboardServer;
 @NmsReflection(usesReflection = true)
 public abstract class ExPacketPlayOutSideboard extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutSideboard {
 
-    public enum Action {
-        CHANGE(ScoreboardServer.Action.a), REMOVE(ScoreboardServer.Action.b);
-
-
-        private final ScoreboardServer.Action nms;
-
-        Action(ScoreboardServer.Action nms) {
-            this.nms = nms;
-        }
-
-        public ScoreboardServer.Action getNms() {
-            return nms;
-        }
-    }
-
     protected final String sideboardName;
     protected final int line;
     protected final String text;
 
-    public ExPacketPlayOutSideboard(Packet<? extends PacketListener> packet, String sideboardName, int line, String text) {
+    public ExPacketPlayOutSideboard(Packet<? extends PacketListener> packet, String sideboardName, int line,
+                                    String text) {
         super(packet);
         this.sideboardName = sideboardName;
         this.line = line;
@@ -42,6 +28,21 @@ public abstract class ExPacketPlayOutSideboard extends ExPacketPlayOut implement
         this.sideboardName = sideboardName;
         this.line = line;
         this.text = text;
+    }
+
+    public static ExPacketPlayOut getPacket(PacketPlayOutScoreboardScore packet) throws UnsupportedPacketException {
+        ScoreboardServer.Action type = (ScoreboardServer.Action) RefUtil.getInstanceField(packet, "d");
+        int line = (int) RefUtil.getInstanceField(packet, "c");
+        String text = (String) RefUtil.getInstanceField(packet, "a");
+        String scoreboardName = (String) RefUtil.getInstanceField(packet, "b");
+
+        if (type.equals(Action.CHANGE.getNms())) {
+            return new ExPacketPlayOutSideboardScoreSet(scoreboardName, text, line);
+        } else if (type.equals(Action.REMOVE.getNms())) {
+            return new ExPacketPlayOutSideboardScoreRemove(scoreboardName, text, line);
+        }
+
+        throw new UnsupportedPacketException(packet);
     }
 
     @Override
@@ -64,18 +65,19 @@ public abstract class ExPacketPlayOutSideboard extends ExPacketPlayOut implement
         return "line: " + this.line + " text: " + this.text;
     }
 
-    public static ExPacketPlayOut getPacket(PacketPlayOutScoreboardScore packet) throws UnsupportedPacketException {
-        ScoreboardServer.Action type = (ScoreboardServer.Action) RefUtil.getInstanceField(packet, "d");
-        int line = (int) RefUtil.getInstanceField(packet, "c");
-        String text = (String) RefUtil.getInstanceField(packet, "a");
-        String scoreboardName = (String) RefUtil.getInstanceField(packet, "b");
+    public enum Action {
+        CHANGE(ScoreboardServer.Action.a),
+        REMOVE(ScoreboardServer.Action.b);
 
-        if (type.equals(Action.CHANGE.getNms())) {
-            return new ExPacketPlayOutSideboardScoreSet(scoreboardName, text, line);
-        } else if (type.equals(Action.REMOVE.getNms())) {
-            return new ExPacketPlayOutSideboardScoreRemove(scoreboardName, text, line);
+
+        private final ScoreboardServer.Action nms;
+
+        Action(ScoreboardServer.Action nms) {
+            this.nms = nms;
         }
 
-        throw new UnsupportedPacketException(packet);
+        public ScoreboardServer.Action getNms() {
+            return nms;
+        }
     }
 }

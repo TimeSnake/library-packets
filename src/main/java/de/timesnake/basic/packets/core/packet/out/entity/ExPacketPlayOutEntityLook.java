@@ -14,11 +14,13 @@ public class ExPacketPlayOutEntityLook extends ExPacketPlayOut implements de.tim
     }
 
     public ExPacketPlayOutEntityLook(EntityExtension<?> entity, float yaw, float pitch, boolean onGround) {
-        super(new PacketPlayOutEntity.PacketPlayOutEntityLook(entity.getExtension().getId(), (byte) (yaw * 256 / 360), (byte) (pitch * 256 / 360), onGround));
+        super(new PacketPlayOutEntity.PacketPlayOutEntityLook(entity.getExtension().getId(), (byte) (yaw * 256 / 360)
+                , (byte) (pitch * 256 / 360), onGround));
     }
 
     public ExPacketPlayOutEntityLook(Entity entity, float yaw, float pitch, boolean onGround) {
-        super(new PacketPlayOutEntity.PacketPlayOutEntityLook(entity.getEntityId(), (byte) (yaw * 256 / 360), (byte) (pitch * 256 / 360), onGround));
+        super(new PacketPlayOutEntity.PacketPlayOutEntityLook(entity.getEntityId(), (byte) (yaw * 256 / 360),
+                (byte) (pitch * 256 / 360), onGround));
     }
 
     public static ExPacketPlayOutEntityLook getPacket(PacketPlayOutEntity.PacketPlayOutEntityLook packet) {
