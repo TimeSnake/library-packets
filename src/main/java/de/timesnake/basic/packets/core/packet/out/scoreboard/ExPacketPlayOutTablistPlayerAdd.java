@@ -11,17 +11,20 @@ import org.bukkit.entity.Player;
 public class ExPacketPlayOutTablistPlayerAdd extends ExPacketPlayOutTablistPlayer implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistPlayerAdd {
 
     public ExPacketPlayOutTablistPlayerAdd(EntityPlayer entityPlayers) {
-        super(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, entityPlayers), entityPlayers);
+        super(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, entityPlayers),
+                entityPlayers);
     }
 
     public ExPacketPlayOutTablistPlayerAdd(Player player) {
         super(player);
-        super.packet = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, ((CraftPlayer) player).getHandle());
+        super.packet = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a,
+                ((CraftPlayer) player).getHandle());
     }
 
     public ExPacketPlayOutTablistPlayerAdd(String name, Head head) {
         super(ExPacketPlayOutTablist.newEntry(name, head).getBukkitEntity());
-        super.packet = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, ((CraftPlayer) super.player).getHandle());
+        super.packet = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a,
+                ((CraftPlayer) super.player).getHandle());
     }
 
     public ExPacketPlayOutTablistPlayerAdd(PacketPlayOutPlayerInfo packet, Player player) {

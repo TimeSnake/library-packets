@@ -14,7 +14,8 @@ public class ExClientboundSetBorderLerpSizePacket extends ExPacketPlayOut implem
     }
 
     public ExClientboundSetBorderLerpSizePacket(World world, double newSize, double oldSize, long time) {
-        super(new ClientboundSetBorderLerpSizePacket(PacketWorldBorder.lerp(((CraftWorld) world).getHandle(), newSize, oldSize, time)));
+        super(new ClientboundSetBorderLerpSizePacket(PacketWorldBorder.lerp(((CraftWorld) world).getHandle(), newSize
+                , oldSize, time)));
     }
 
     @Override

@@ -7,7 +7,8 @@ import net.minecraft.network.protocol.game.PacketPlayOutScoreboardScore;
 public class ExPacketPlayOutSideboardScoreRemove extends ExPacketPlayOutSideboard implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutSideboardScoreRemove {
 
     public ExPacketPlayOutSideboardScoreRemove(String sideboardName, String text, int line) {
-        super(new PacketPlayOutScoreboardScore(Action.REMOVE.getNms(), sideboardName, text, line), sideboardName, line, text);
+        super(new PacketPlayOutScoreboardScore(Action.REMOVE.getNms(), sideboardName, text, line), sideboardName,
+                line, text);
     }
 
     @Override

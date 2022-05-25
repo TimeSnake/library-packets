@@ -19,7 +19,8 @@ public class ListenerManager {
     protected ConcurrentHashMap<ExPacket.Type, ConcurrentHashMap<PacketPlayOutListener, Set<Method>>> playOutListeners = new ConcurrentHashMap<>();
     protected ConcurrentHashMap<ExPacket.Type, ConcurrentHashMap<PacketPlayOutListener, Set<Method>>> modifyPlayOutListeners = new ConcurrentHashMap<>();
 
-    protected ConcurrentHashMap<ExPacket.Type, ConcurrentHashMap<PacketPlayInListener, Set<Method>>> playInListeners = new ConcurrentHashMap<>();
+    protected ConcurrentHashMap<ExPacket.Type, ConcurrentHashMap<PacketPlayInListener, Set<Method>>> playInListeners
+            = new ConcurrentHashMap<>();
     protected ConcurrentHashMap<ExPacket.Type, ConcurrentHashMap<PacketPlayInListener, Set<Method>>> modifyPlayInListeners = new ConcurrentHashMap<>();
 
     public void addListener(PacketPlayOutListener listener) {
@@ -119,7 +120,8 @@ public class ListenerManager {
     }
 
     public void removeListener(PacketPlayOutListener listener, ExPacket.Type... types) {
-        List<ConcurrentHashMap<PacketPlayOutListener, Set<Method>>> listeners = this.playOutListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList();
+        List<ConcurrentHashMap<PacketPlayOutListener, Set<Method>>> listeners =
+                this.playOutListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList();
         listeners.addAll(this.modifyPlayOutListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList());
 
         for (ConcurrentHashMap<PacketPlayOutListener, ?> listenerMethods : listeners) {
@@ -128,7 +130,8 @@ public class ListenerManager {
     }
 
     public void removeListener(PacketPlayInListener listener, ExPacket.Type... types) {
-        List<ConcurrentHashMap<PacketPlayInListener, Set<Method>>> listeners = this.playInListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList();
+        List<ConcurrentHashMap<PacketPlayInListener, Set<Method>>> listeners =
+                this.playInListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList();
         listeners.addAll(this.modifyPlayInListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList());
 
         for (ConcurrentHashMap<PacketPlayInListener, ?> listenerMethods : listeners) {
@@ -163,7 +166,8 @@ public class ListenerManager {
 
         boolean block = false;
 
-        Set<Map.Entry<PacketPlayOutListener, Set<Method>>> set = this.modifyPlayOutListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
+        Set<Map.Entry<PacketPlayOutListener, Set<Method>>> set =
+                this.modifyPlayOutListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
 
         for (Map.Entry<PacketPlayOutListener, Set<Method>> subSet : set) {
             PacketPlayOutListener listener = subSet.getKey();
@@ -211,7 +215,8 @@ public class ListenerManager {
 
         boolean block = false;
 
-        Set<Map.Entry<PacketPlayInListener, Set<Method>>> set = this.modifyPlayInListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
+        Set<Map.Entry<PacketPlayInListener, Set<Method>>> set =
+                this.modifyPlayInListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
 
         for (Map.Entry<PacketPlayInListener, Set<Method>> subSet : set) {
             PacketPlayInListener listener = subSet.getKey();

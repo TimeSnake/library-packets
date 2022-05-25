@@ -11,17 +11,20 @@ import org.bukkit.entity.Player;
 public class ExPacketPlayOutTablistPlayerRemove extends ExPacketPlayOutTablistPlayer implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistPlayerRemove {
 
     public ExPacketPlayOutTablistPlayerRemove(ExPlayer entityPlayer) {
-        super(new PacketPlayOutPlayerInfo(ExEnumPlayerInfoAction.REMOVE_PLAYER.getNms(), entityPlayer.getHandle()), entityPlayer);
+        super(new PacketPlayOutPlayerInfo(ExEnumPlayerInfoAction.REMOVE_PLAYER.getNms(), entityPlayer.getHandle()),
+                entityPlayer);
     }
 
     public ExPacketPlayOutTablistPlayerRemove(Player player) {
         super(player);
-        super.packet = new PacketPlayOutPlayerInfo(ExEnumPlayerInfoAction.REMOVE_PLAYER.getNms(), ((CraftPlayer) player).getHandle());
+        super.packet = new PacketPlayOutPlayerInfo(ExEnumPlayerInfoAction.REMOVE_PLAYER.getNms(),
+                ((CraftPlayer) player).getHandle());
     }
 
     public ExPacketPlayOutTablistPlayerRemove(String name, Head head) {
         super(ExPacketPlayOutTablist.newEntry(name, head).getBukkitEntity());
-        super.packet = new PacketPlayOutPlayerInfo(ExEnumPlayerInfoAction.REMOVE_PLAYER.getNms(), ((CraftPlayer) super.getPlayer()).getHandle());
+        super.packet = new PacketPlayOutPlayerInfo(ExEnumPlayerInfoAction.REMOVE_PLAYER.getNms(),
+                ((CraftPlayer) super.getPlayer()).getHandle());
     }
 
     public ExPacketPlayOutTablistPlayerRemove(PacketPlayOutPlayerInfo packet, Player player) {

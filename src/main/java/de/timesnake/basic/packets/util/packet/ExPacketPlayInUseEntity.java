@@ -5,6 +5,8 @@ public interface ExPacketPlayInUseEntity extends ExPacketPlayIn {
     UseType getUseType();
 
     enum UseType {
-        INTERACT, ATTACK, INTERACT_AT
+        INTERACT,
+        ATTACK,
+        INTERACT_AT
     }
 }

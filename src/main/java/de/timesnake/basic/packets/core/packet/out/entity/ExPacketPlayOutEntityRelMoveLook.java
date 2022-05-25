@@ -9,12 +9,18 @@ import org.bukkit.entity.LivingEntity;
 @NmsReflection
 public class ExPacketPlayOutEntityRelMoveLook extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutEntityRelMoveLook {
 
-    public ExPacketPlayOutEntityRelMoveLook(LivingEntity entity, double deltaX, double deltaY, double deltaZ, float yaw, float pitch, boolean onGround) {
-        super(new PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook(entity.getEntityId(), (short) (deltaX * 32 * 128), (short) (deltaY * 32 * 128), (short) (deltaZ * 32 * 128), (byte) (yaw * 256 / 360), (byte) (pitch * 256 / 360), onGround));
+    public ExPacketPlayOutEntityRelMoveLook(LivingEntity entity, double deltaX, double deltaY, double deltaZ,
+                                            float yaw, float pitch, boolean onGround) {
+        super(new PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook(entity.getEntityId(),
+                (short) (deltaX * 32 * 128), (short) (deltaY * 32 * 128), (short) (deltaZ * 32 * 128),
+                (byte) (yaw * 256 / 360), (byte) (pitch * 256 / 360), onGround));
     }
 
-    public ExPacketPlayOutEntityRelMoveLook(ExEntityLiving entity, double deltaX, double deltaY, double deltaZ, float yaw, float pitch, boolean onGround) {
-        super(new PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook(entity.getId(), (short) (deltaX * 32 * 128), (short) (deltaY * 32 * 128), (short) (deltaZ * 32 * 128), (byte) (yaw * 256 / 360), (byte) (pitch * 256 / 360), onGround));
+    public ExPacketPlayOutEntityRelMoveLook(ExEntityLiving entity, double deltaX, double deltaY, double deltaZ,
+                                            float yaw, float pitch, boolean onGround) {
+        super(new PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook(entity.getId(), (short) (deltaX * 32 * 128),
+                (short) (deltaY * 32 * 128), (short) (deltaZ * 32 * 128), (byte) (yaw * 256 / 360),
+                (byte) (pitch * 256 / 360), onGround));
     }
 
     @Override

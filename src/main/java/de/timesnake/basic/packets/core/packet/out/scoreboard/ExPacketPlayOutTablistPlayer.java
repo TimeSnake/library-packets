@@ -19,7 +19,11 @@ import java.util.List;
 public abstract class ExPacketPlayOutTablistPlayer extends ExPacketPlayOutTablist implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutTablistPlayer {
 
     public enum ExEnumPlayerInfoAction {
-        ADD_PLAYER(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a), UPDATE_GAME_MODE(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.b), UPDATE_LATENCY(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.c), UPDATE_DISPLAY_NAME(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.d), REMOVE_PLAYER(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.e);
+        ADD_PLAYER(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a),
+        UPDATE_GAME_MODE(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.b),
+        UPDATE_LATENCY(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.c),
+        UPDATE_DISPLAY_NAME(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.d),
+        REMOVE_PLAYER(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.e);
 
         private final PacketPlayOutPlayerInfo.EnumPlayerInfoAction nms;
 

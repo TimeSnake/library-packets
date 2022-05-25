@@ -20,7 +20,8 @@ public class ExPacketPlayOutTablistHeaderFooter extends ExPacketPlayOutTablist i
             header = "";
         }
 
-        super.packet = new PacketPlayOutPlayerListHeaderFooter(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + header + "\"}"), IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + footer + "\"}"));
+        super.packet =
+                new PacketPlayOutPlayerListHeaderFooter(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + header + "\"}"), IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + footer + "\"}"));
 
         this.header = header;
         this.footer = footer;
@@ -40,6 +41,10 @@ public class ExPacketPlayOutTablistHeaderFooter extends ExPacketPlayOutTablist i
         }
     }
 
+    public static ExPacketPlayOut getPacket(PacketPlayOutPlayerListHeaderFooter packet) {
+        return new ExPacketPlayOutTablistHeaderFooter(packet);
+    }
+
     @Override
     public String getInfo() {
         return "header: " + this.header + " footer: " + this.footer;
@@ -48,9 +53,5 @@ public class ExPacketPlayOutTablistHeaderFooter extends ExPacketPlayOutTablist i
     @Override
     public Type getType() {
         return Type.PLAY_OUT_TABLIST_HEADER_FOOTER;
-    }
-
-    public static ExPacketPlayOut getPacket(PacketPlayOutPlayerListHeaderFooter packet) {
-        return new ExPacketPlayOutTablistHeaderFooter(packet);
     }
 }

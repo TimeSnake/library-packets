@@ -13,9 +13,11 @@ public class ExClientboundInitializeBorderPacket extends ExPacketPlayOut impleme
         super(packet);
     }
 
-    public ExClientboundInitializeBorderPacket(World world, double centerX, double centerZ, double startSize, double shrinkSize, long time, int warningDistance, int warningTime) {
+    public ExClientboundInitializeBorderPacket(World world, double centerX, double centerZ, double startSize,
+                                               double shrinkSize, long time, int warningDistance, int warningTime) {
 
-        super(new ClientboundInitializeBorderPacket(new PacketWorldBorder(((CraftWorld) world).getHandle(), centerX, centerZ, startSize, shrinkSize, time, warningDistance, warningTime)));
+        super(new ClientboundInitializeBorderPacket(new PacketWorldBorder(((CraftWorld) world).getHandle(), centerX,
+                centerZ, startSize, shrinkSize, time, warningDistance, warningTime)));
     }
 
     @Override

@@ -17,10 +17,6 @@ import java.util.List;
 @NmsReflection
 public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de.timesnake.basic.packets.util.packet.ExPacketPlayOutEntityMetadata {
 
-    public static ExPacketPlayOutEntityMetadata getPacket(PacketPlayOutEntityMetadata packet) {
-        return new ExPacketPlayOutEntityMetadata(packet);
-    }
-
     public ExPacketPlayOutEntityMetadata(PacketPlayOutEntityMetadata packet) {
         super(packet);
     }
@@ -50,6 +46,10 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         if (type == DataType.UPDATE) {
             super.packet = new PacketPlayOutEntityMetadata(entity.getId(), entity.getDataWatcher(), flag);
         }
+    }
+
+    public static ExPacketPlayOutEntityMetadata getPacket(PacketPlayOutEntityMetadata packet) {
+        return new ExPacketPlayOutEntityMetadata(packet);
     }
 
     public Integer getNMSIndex() {
@@ -88,7 +88,8 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
             }
         }
 
-        PacketPlayOutEntityMetadata clonedPacket = new PacketPlayOutEntityMetadata(entityId, new DataWatcher(null), true);
+        PacketPlayOutEntityMetadata clonedPacket = new PacketPlayOutEntityMetadata(entityId, new DataWatcher(null),
+                true);
         RefUtil.setInstanceField(clonedPacket, "b", itemList);
         return new ExPacketPlayOutEntityMetadata(clonedPacket);
     }
@@ -116,7 +117,8 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
             }
         }
 
-        PacketPlayOutEntityMetadata clonedPacket = new PacketPlayOutEntityMetadata(entityId, new DataWatcher(null), true);
+        PacketPlayOutEntityMetadata clonedPacket = new PacketPlayOutEntityMetadata(entityId, new DataWatcher(null),
+                true);
         RefUtil.setInstanceField(clonedPacket, "a", entityId);
         RefUtil.setInstanceField(clonedPacket, "b", itemList);
         return new ExPacketPlayOutEntityMetadata(clonedPacket);
@@ -133,7 +135,7 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         }
         DataWatcher.Item<?> item = packetB.get(0);
         DataWatcherObject<?> itemA = item.a();
-        if (itemA.a() == 0 && item.b() instanceof Byte) {
+        if (itemA.a() == MetadataIndex.BASE.getIndex() && item.b() instanceof Byte) {
             Byte itemB = (Byte) RefUtil.getInstanceField(item, "b");
             if (flag) {
                 RefUtil.setInstanceField(item, "b", ((byte) (itemB | 0x40)));
@@ -152,7 +154,7 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         }
         DataWatcher.Item<?> item = packetB.get(0);
         DataWatcherObject<?> itemA = item.a();
-        if (itemA.a() == 0 && item.b() instanceof Byte) {
+        if (itemA.a() == MetadataIndex.BASE.getIndex() && item.b() instanceof Byte) {
             Byte itemB = (Byte) RefUtil.getInstanceField(item, "b");
             if ((itemB & 0x80) != 0x80 && flag) {
                 RefUtil.setInstanceField(item, "b", ((byte) (itemB | 0x80)));
@@ -172,7 +174,7 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         }
         DataWatcher.Item<?> item = packetB.get(0);
         DataWatcherObject<?> itemA = item.a();
-        if (itemA.a() == 0 && item.b() instanceof EntityPose) {
+        if (itemA.a() == MetadataIndex.POSE.getIndex() && item.b() instanceof EntityPose) {
             RefUtil.setInstanceField(item, "b", pose.getPose());
             return true;
         }
@@ -191,5 +193,20 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
     @Override
     public Type getType() {
         return Type.PLAY_OUT_ENTITY_METADATA;
+    }
+
+    private enum MetadataIndex {
+        BASE(0),
+        POSE(18);
+
+        private final int index;
+
+        MetadataIndex(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
     }
 }

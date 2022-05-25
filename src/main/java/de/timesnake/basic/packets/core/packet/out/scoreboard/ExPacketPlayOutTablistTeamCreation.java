@@ -32,7 +32,8 @@ public class ExPacketPlayOutTablistTeamCreation extends ExPacketPlayOutTablistTe
         this.prefix = prefix;
     }
 
-    public ExPacketPlayOutTablistTeamCreation(String name, String prefix, ChatColor chatColor, NameTagVisibility visibility) {
+    public ExPacketPlayOutTablistTeamCreation(String name, String prefix, ChatColor chatColor,
+                                              NameTagVisibility visibility) {
         super(name);
         if (name == null || name.equals("")) {
             this.prefix = null;

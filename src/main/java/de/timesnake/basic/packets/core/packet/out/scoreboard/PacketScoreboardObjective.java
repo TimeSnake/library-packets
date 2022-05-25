@@ -9,7 +9,8 @@ import net.minecraft.world.scores.criteria.IScoreboardCriteria;
 @NmsReflection
 public class PacketScoreboardObjective extends ScoreboardObjective {
 
-    public PacketScoreboardObjective(String name, IChatBaseComponent title, IScoreboardCriteria.EnumScoreboardHealthDisplay type) {
+    public PacketScoreboardObjective(String name, IChatBaseComponent title,
+                                     IScoreboardCriteria.EnumScoreboardHealthDisplay type) {
         super(null, name, null, title, type);
     }
 
