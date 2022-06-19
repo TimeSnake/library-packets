@@ -4,7 +4,7 @@ import de.timesnake.library.entities.entity.extension.ExEntity;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutSpawnEntity;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 
 @NmsReflection

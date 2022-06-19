@@ -5,7 +5,7 @@ import de.timesnake.library.packets.util.packet.ExPacket;
 import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.ClientboundSetBorderSizePacket;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
 
 @NmsReflection
 public class ExClientboundSetBorderSizePacket extends ExPacketPlayOut implements de.timesnake.library.packets.util.ExClientboundSetBorderSizePacket {

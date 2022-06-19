@@ -1,12 +1,9 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
-import de.timesnake.library.entities.entity.extension.ExEntityLiving;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
-import net.minecraft.network.protocol.game.PacketPlayOutSpawnEntityLiving;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
-import org.bukkit.entity.LivingEntity;
+import net.minecraft.network.protocol.game.PacketPlayOutNamedEntitySpawn;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -20,21 +17,8 @@ public class ExPacketPlayOutSpawnEntityLiving extends ExPacketPlayOut implements
     public ExPacketPlayOutSpawnEntityLiving(Player player) {
         this.name = player.getName();
         this.uuid = player.getUniqueId();
-        super.packet = new PacketPlayOutSpawnEntityLiving(((CraftPlayer) player).getHandle());
+        super.packet = new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle());
     }
-
-    public ExPacketPlayOutSpawnEntityLiving(LivingEntity entity) {
-        this.name = entity.getCustomName() != null ? entity.getCustomName() : null;
-        this.uuid = entity.getUniqueId();
-        super.packet = new PacketPlayOutSpawnEntityLiving(((CraftLivingEntity) entity).getHandle());
-    }
-
-    public ExPacketPlayOutSpawnEntityLiving(ExEntityLiving entity) {
-        this.name = entity.getCustomName() != null ? entity.getCustomName() : null;
-        this.uuid = entity.getBukkitEntity().getUniqueId();
-        super.packet = new PacketPlayOutSpawnEntityLiving(entity.getNMS());
-    }
-
 
     @Override
     public String getInfo() {

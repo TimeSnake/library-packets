@@ -2,7 +2,7 @@ package de.timesnake.library.packets.util.packet;
 
 import de.timesnake.library.entities.entity.extension.EntityExtension;
 import de.timesnake.library.entities.entity.extension.ExEntity;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 
 public interface ExPacketPlayOutEntityHeadRotation extends ExPacketPlayOut {

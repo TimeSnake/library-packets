@@ -2,8 +2,8 @@ package de.timesnake.library.packets.core.packet.out;
 
 import net.minecraft.network.protocol.game.PacketPlayOutMap;
 import net.minecraft.world.level.saveddata.maps.WorldMap;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_18_R2.map.CraftMapView;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R1.map.CraftMapView;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 

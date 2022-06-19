@@ -5,8 +5,8 @@ import io.netty.channel.Channel;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.network.PlayerConnection;
 import net.minecraft.world.item.ItemStack;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
 @NmsReflection
@@ -17,7 +17,7 @@ public class BukkitNmsParser {
     }
 
     public static Channel getPlayerChannel(Player player) {
-        return getPlayerConnection(player).a.m;
+        return getPlayerConnection(player).b.m;
     }
 
     public static PlayerConnection getPlayerConnection(Player player) {

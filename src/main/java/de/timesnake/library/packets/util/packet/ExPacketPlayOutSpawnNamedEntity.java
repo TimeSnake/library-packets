@@ -1,6 +1,6 @@
 package de.timesnake.library.packets.util.packet;
 
-import de.timesnake.library.entities.entity.bukkit.extension.ExPlayer;
+import de.timesnake.library.entities.entity.bukkit.ExPlayer;
 import org.bukkit.entity.Player;
 
 public interface ExPacketPlayOutSpawnNamedEntity extends ExPacketPlayOut {
