@@ -2,10 +2,10 @@ package de.timesnake.library.packets.core.packet.out.scoreboard;
 
 import de.timesnake.library.reflection.NmsReflection;
 import de.timesnake.library.reflection.RefUtil;
+import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardTeam;
 import net.minecraft.world.scores.ScoreboardTeam;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_18_R2.util.CraftChatMessage;
 
 @NmsReflection(usesReflection = true)
 public class ExPacketPlayOutTablistTeamCreation extends ExPacketPlayOutTablistTeam implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistTeamCreation {
@@ -23,10 +23,11 @@ public class ExPacketPlayOutTablistTeamCreation extends ExPacketPlayOutTablistTe
 
         RefUtil.setInstanceField(team, "m", getEnumChatFormat(chatColor));
 
-        if (prefix != null && prefix.equals("")) {
-            prefix = null;
+        if (prefix == null) {
+            prefix = "";
         }
-        RefUtil.setInstanceField(team, "g", CraftChatMessage.fromStringOrNull(prefix));
+
+        RefUtil.setInstanceField(team, "g", IChatBaseComponent.a(prefix));
 
         super.packet = PacketPlayOutScoreboardTeam.a(team, true);
         this.prefix = prefix;
@@ -46,10 +47,11 @@ public class ExPacketPlayOutTablistTeamCreation extends ExPacketPlayOutTablistTe
         RefUtil.setInstanceField(team, "k", visibility.getNms());
         RefUtil.setInstanceField(team, "l", visibility.getNms());
 
-        if (prefix != null && prefix.equals("")) {
-            prefix = null;
+        if (prefix == null) {
+            prefix = "";
         }
-        RefUtil.setInstanceField(team, "g", CraftChatMessage.fromStringOrNull(prefix));
+
+        RefUtil.setInstanceField(team, "g", IChatBaseComponent.a(prefix));
 
         super.packet = PacketPlayOutScoreboardTeam.a(team, true);
         this.prefix = prefix;

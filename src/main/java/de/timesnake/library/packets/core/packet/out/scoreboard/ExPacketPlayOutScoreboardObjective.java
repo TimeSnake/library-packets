@@ -2,7 +2,7 @@ package de.timesnake.library.packets.core.packet.out.scoreboard;
 
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
-import net.minecraft.network.chat.ChatComponentText;
+import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardObjective;
 import net.minecraft.world.scores.ScoreboardObjective;
 
@@ -23,7 +23,7 @@ public class ExPacketPlayOutScoreboardObjective extends ExPacketPlayOut implemen
 
     public ExPacketPlayOutScoreboardObjective(String name, String title, Display display,
                                               ExPacketPlayOutScoreboardObjective.ScoreboardType type) {
-        ScoreboardObjective sb = new PacketScoreboardObjective(name, new ChatComponentText(title), type.getType());
+        ScoreboardObjective sb = new PacketScoreboardObjective(name, IChatBaseComponent.a(title), type.getType());
 
         super.packet = new PacketPlayOutScoreboardObjective(sb, display.getDisplay());
 

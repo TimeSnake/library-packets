@@ -3,15 +3,15 @@ package de.timesnake.library.packets.util.packet;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.RefUtil;
-import net.minecraft.network.chat.ChatComponentText;
+import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.EntityPlayer;
 import net.minecraft.server.level.WorldServer;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_18_R2.CraftServer;
-import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
 
+import java.lang.reflect.Field;
 import java.util.UUID;
 
 @NmsReflection
@@ -22,8 +22,14 @@ public interface ExPacketPlayOutTablist extends ExPacketPlayOut {
         profile.getProperties().put("textures", new Property("textures", head.getValue(), head.getSignature()));
         MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
         WorldServer world = (((CraftWorld) Bukkit.getWorld("world")).getHandle());
-        EntityPlayer player = new EntityPlayer(server, world, profile);
-        RefUtil.setInstanceField(player, "listName", new ChatComponentText(name));
+        EntityPlayer player = new EntityPlayer(server, world, profile, null);
+        try {
+            Field listName = player.getClass().getField("listName");
+            listName.setAccessible(true);
+            listName.set(player, IChatBaseComponent.a(name));
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
         return player;
     }
 

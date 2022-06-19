@@ -1,10 +1,10 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
-import de.timesnake.library.entities.entity.bukkit.extension.ExPlayer;
+import de.timesnake.library.entities.entity.bukkit.ExPlayer;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutNamedEntitySpawn;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 @NmsReflection

@@ -1,6 +1,6 @@
 package de.timesnake.library.packets.util.packet;
 
-import de.timesnake.library.entities.entity.bukkit.extension.ExPlayer;
+import de.timesnake.library.entities.entity.bukkit.ExPlayer;
 import net.minecraft.network.protocol.game.PacketPlayOutPlayerInfo;
 import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.entity.Player;
