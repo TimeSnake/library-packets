@@ -1,7 +1,7 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
+import de.timesnake.library.entities.entity.ExtendedCraftEntity;
 import de.timesnake.library.entities.entity.bukkit.ExPlayer;
-import de.timesnake.library.entities.entity.extension.EntityExtension;
 import de.timesnake.library.entities.entity.extension.ExEntity;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
@@ -32,11 +32,11 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         }
     }
 
-    public ExPacketPlayOutEntityMetadata(EntityExtension<?> entity, DataType type) {
+    public ExPacketPlayOutEntityMetadata(ExtendedCraftEntity<?> entity, DataType type) {
         this(entity.getExtension(), type);
     }
 
-    public ExPacketPlayOutEntityMetadata(EntityExtension<?> entity, DataType type, boolean flag) {
+    public ExPacketPlayOutEntityMetadata(ExtendedCraftEntity<?> entity, DataType type, boolean flag) {
         this(entity.getExtension(), type, flag);
     }
 

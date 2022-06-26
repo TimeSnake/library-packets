@@ -1,6 +1,6 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
-import de.timesnake.library.entities.entity.extension.EntityExtension;
+import de.timesnake.library.entities.entity.ExtendedCraftEntity;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutEntity;
@@ -17,7 +17,7 @@ public class ExPacketPlayOutEntityLook extends ExPacketPlayOut implements de.tim
         super(packet);
     }
 
-    public ExPacketPlayOutEntityLook(EntityExtension<?> entity, float yaw, float pitch, boolean onGround) {
+    public ExPacketPlayOutEntityLook(ExtendedCraftEntity<?> entity, float yaw, float pitch, boolean onGround) {
         super(new PacketPlayOutEntity.PacketPlayOutEntityLook(entity.getExtension().getId(), (byte) (yaw * 256 / 360)
                 , (byte) (pitch * 256 / 360), onGround));
     }
