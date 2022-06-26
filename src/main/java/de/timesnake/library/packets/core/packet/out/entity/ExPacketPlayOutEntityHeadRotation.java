@@ -1,6 +1,6 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
-import de.timesnake.library.entities.entity.extension.EntityExtension;
+import de.timesnake.library.entities.entity.ExtendedCraftEntity;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityHeadRotation;
@@ -20,7 +20,7 @@ public class ExPacketPlayOutEntityHeadRotation extends ExPacketPlayOut implement
         super(packet);
     }
 
-    public ExPacketPlayOutEntityHeadRotation(EntityExtension<?> entity, float yaw) {
+    public ExPacketPlayOutEntityHeadRotation(ExtendedCraftEntity<?> entity, float yaw) {
         super(new PacketPlayOutEntityHeadRotation(entity.getExtension().getNMS(), (byte) (yaw * 256 / 360)));
         this.entityId = entity.getExtension().getId();
         this.yaw = yaw;
