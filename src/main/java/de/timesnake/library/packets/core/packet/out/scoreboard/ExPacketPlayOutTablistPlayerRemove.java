@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
 public class ExPacketPlayOutTablistPlayerRemove extends ExPacketPlayOutTablistPlayer implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistPlayerRemove {
 
     public ExPacketPlayOutTablistPlayerRemove(ExPlayer entityPlayer) {
-        super(new PacketPlayOutPlayerInfo(ExEnumPlayerInfoAction.REMOVE_PLAYER.getNms(), entityPlayer.getNMS()),
-                entityPlayer.getNMS());
+        super(new PacketPlayOutPlayerInfo(ExEnumPlayerInfoAction.REMOVE_PLAYER.getNms(), entityPlayer.getHandle()),
+                entityPlayer.getHandle());
     }
 
     public ExPacketPlayOutTablistPlayerRemove(Player player) {

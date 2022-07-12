@@ -16,7 +16,7 @@ public class ExPacketPlayOutPlayerInfo extends ExPacketPlayOut implements de.tim
     }
 
     public ExPacketPlayOutPlayerInfo(ExPlayer player, Action action) {
-        super.packet = new PacketPlayOutPlayerInfo(action.getAction(), player.getNMS());
+        super.packet = new PacketPlayOutPlayerInfo(action.getAction(), player.getHandle());
     }
 
     public ExPacketPlayOutPlayerInfo(EntityPlayer player, Action action) {
