@@ -32,7 +32,8 @@ import java.util.Collection;
 import java.util.Optional;
 
 @NmsReflection(usesReflection = true)
-public abstract class ExPacketPlayOutTablistTeam extends ExPacketPlayOutTablist implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistTeam {
+public abstract class ExPacketPlayOutTablistTeam extends ExPacketPlayOutTablist
+        implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistTeam {
 
     public static ExPacketPlayOut getPacket(PacketPlayOutScoreboardTeam packet) throws UnsupportedPacketException {
         String name = (String) RefUtil.getInstanceField(packet, "i");

@@ -19,11 +19,12 @@
 package de.timesnake.library.packets.core.packet.out.scoreboard;
 
 import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.RefUtil;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardTeam;
 import net.minecraft.world.scores.ScoreboardTeam;
 import org.bukkit.ChatColor;
+
+import java.lang.reflect.Field;
 
 @NmsReflection(usesReflection = true)
 public class ExPacketPlayOutTablistTeamCreation extends ExPacketPlayOutTablistTeam implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistTeamCreation {
@@ -39,13 +40,25 @@ public class ExPacketPlayOutTablistTeamCreation extends ExPacketPlayOutTablistTe
 
         ScoreboardTeam team = new ScoreboardTeam(null, name);
 
-        RefUtil.setInstanceField(team, "m", getEnumChatFormat(chatColor));
+        try {
+            Field m = ScoreboardTeam.class.getDeclaredField("m");
+            m.setAccessible(true);
+            m.set(team, getEnumChatFormat(chatColor));
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
 
         if (prefix == null) {
             prefix = "";
         }
 
-        RefUtil.setInstanceField(team, "g", IChatBaseComponent.a(prefix));
+        try {
+            Field g = ScoreboardTeam.class.getDeclaredField("g");
+            g.setAccessible(true);
+            g.set(team, IChatBaseComponent.a(prefix));
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
 
         super.packet = PacketPlayOutScoreboardTeam.a(team, true);
         this.prefix = prefix;
@@ -61,15 +74,41 @@ public class ExPacketPlayOutTablistTeamCreation extends ExPacketPlayOutTablistTe
 
         ScoreboardTeam team = new ScoreboardTeam(null, name);
 
-        RefUtil.setInstanceField(team, "m", getEnumChatFormat(chatColor));
-        RefUtil.setInstanceField(team, "k", visibility.getNms());
-        RefUtil.setInstanceField(team, "l", visibility.getNms());
+        try {
+            Field m = ScoreboardTeam.class.getDeclaredField("m");
+            m.setAccessible(true);
+            m.set(team, getEnumChatFormat(chatColor));
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
 
         if (prefix == null) {
             prefix = "";
         }
 
-        RefUtil.setInstanceField(team, "g", IChatBaseComponent.a(prefix));
+        try {
+            Field g = ScoreboardTeam.class.getDeclaredField("g");
+            g.setAccessible(true);
+            g.set(team, IChatBaseComponent.a(prefix));
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            Field k = ScoreboardTeam.class.getDeclaredField("k");
+            k.setAccessible(true);
+            k.set(team, visibility.getNms());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            Field l = ScoreboardTeam.class.getDeclaredField("l");
+            l.setAccessible(true);
+            l.set(team, visibility.getNms());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
 
         super.packet = PacketPlayOutScoreboardTeam.a(team, true);
         this.prefix = prefix;
