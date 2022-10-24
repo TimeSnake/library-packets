@@ -18,7 +18,6 @@
 
 package de.timesnake.library.packets.util.packet;
 
-import de.timesnake.library.entities.entity.extension.ExEntity;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 
@@ -28,23 +27,11 @@ public interface ExPacketPlayOutSpawnEntity extends ExPacketPlayOut {
         return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntity(entity);
     }
 
-    static ExPacketPlayOutSpawnEntity wrap(ExEntity entity) {
-        return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntity(entity);
-    }
-
     static ExPacketPlayOutSpawnEntity wrap(Entity entity, int data) {
         return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntity(entity, data);
     }
 
-    static ExPacketPlayOutSpawnEntity wrap(ExEntity entity, int data) {
-        return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntity(entity, data);
-    }
-
     static ExPacketPlayOutSpawnEntity wrap(Entity entity, ItemFrameRotation rotation) {
-        return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntity(entity, rotation);
-    }
-
-    static ExPacketPlayOutSpawnEntity wrap(ExEntity entity, ItemFrameRotation rotation) {
         return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutSpawnEntity(entity, rotation);
     }
 

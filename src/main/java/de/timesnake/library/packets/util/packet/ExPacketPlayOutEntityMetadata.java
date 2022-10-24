@@ -18,8 +18,7 @@
 
 package de.timesnake.library.packets.util.packet;
 
-import de.timesnake.library.entities.entity.ExtendedCraftEntity;
-import de.timesnake.library.entities.entity.extension.ExEntity;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public interface ExPacketPlayOutEntityMetadata extends ExPacketPlayOut {
@@ -28,20 +27,11 @@ public interface ExPacketPlayOutEntityMetadata extends ExPacketPlayOut {
         return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata(player, type);
     }
 
-    static ExPacketPlayOutEntityMetadata wrap(ExtendedCraftEntity<?> entity, DataType type) {
+    static ExPacketPlayOutEntityMetadata wrap(Entity entity, DataType type) {
         return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata(entity, type);
     }
 
-    static ExPacketPlayOutEntityMetadata wrap(ExtendedCraftEntity<?> entity, DataType type, boolean flag) {
-        return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata(entity, type,
-                flag);
-    }
-
-    static ExPacketPlayOutEntityMetadata wrap(ExEntity entity, DataType type) {
-        return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata(entity, type);
-    }
-
-    static ExPacketPlayOutEntityMetadata wrap(ExEntity entity, DataType type, boolean flag) {
+    static ExPacketPlayOutEntityMetadata wrap(Entity entity, DataType type, boolean flag) {
         return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityMetadata(entity, type,
                 flag);
     }

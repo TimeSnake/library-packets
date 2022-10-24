@@ -20,7 +20,6 @@ package de.timesnake.library.packets.core.packet.out.entity;
 
 import com.mojang.datafixers.util.Pair;
 import de.timesnake.library.basic.util.Tuple;
-import de.timesnake.library.entities.entity.extension.ExEntity;
 import de.timesnake.library.packets.core.BukkitNmsParser;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
@@ -45,18 +44,6 @@ public class ExPacketPlayOutEntityEquipment extends ExPacketPlayOut implements d
         super(packet);
     }
 
-
-    public ExPacketPlayOutEntityEquipment(net.minecraft.world.entity.Entity entity, List<Tuple<EquipmentSlot,
-            ItemStack>> equipment) {
-        List<Pair<EnumItemSlot, net.minecraft.world.item.ItemStack>> nmsEquip = new ArrayList<>();
-        for (Tuple<EquipmentSlot, ItemStack> slotItem : equipment) {
-            nmsEquip.add(new Pair<>(ExEnumItemSlot.parseEquipmentSlot(slotItem.getA()).getNmsSlot(),
-                    BukkitNmsParser.parseItem(slotItem.getB())));
-        }
-
-        super.packet = new PacketPlayOutEntityEquipment(entity.getBukkitEntity().getEntityId(), nmsEquip);
-    }
-
     public ExPacketPlayOutEntityEquipment(Entity entity, List<Tuple<EquipmentSlot, ItemStack>> equipment) {
         List<Pair<EnumItemSlot, net.minecraft.world.item.ItemStack>> nmsEquip = new ArrayList<>();
         for (Tuple<EquipmentSlot, ItemStack> slotItem : equipment) {
@@ -65,16 +52,6 @@ public class ExPacketPlayOutEntityEquipment extends ExPacketPlayOut implements d
         }
 
         super.packet = new PacketPlayOutEntityEquipment(entity.getEntityId(), nmsEquip);
-    }
-
-    public ExPacketPlayOutEntityEquipment(ExEntity entity, List<Tuple<EquipmentSlot, ItemStack>> equipment) {
-        List<Pair<EnumItemSlot, net.minecraft.world.item.ItemStack>> nmsEquip = new ArrayList<>();
-        for (Tuple<EquipmentSlot, ItemStack> slotItem : equipment) {
-            nmsEquip.add(new Pair<>(ExEnumItemSlot.parseEquipmentSlot(slotItem.getA()).getNmsSlot(),
-                    BukkitNmsParser.parseItem(slotItem.getB())));
-        }
-
-        super.packet = new PacketPlayOutEntityEquipment(entity.getBukkitEntity().getEntityId(), nmsEquip);
     }
 
     @Override

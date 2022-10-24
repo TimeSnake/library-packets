@@ -18,7 +18,6 @@
 
 package de.timesnake.library.packets.core.packet.out.entity;
 
-import de.timesnake.library.entities.entity.ExtendedCraftEntity;
 import de.timesnake.library.entities.entity.bukkit.ExPlayer;
 import de.timesnake.library.entities.entity.extension.ExEntity;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
@@ -27,6 +26,8 @@ import de.timesnake.library.reflection.RefUtil;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityMetadata;
 import net.minecraft.network.syncher.DataWatcher;
 import net.minecraft.network.syncher.DataWatcherObject;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -50,23 +51,15 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         }
     }
 
-    public ExPacketPlayOutEntityMetadata(ExtendedCraftEntity<?> entity, DataType type) {
-        this(entity.getExtension(), type);
-    }
-
-    public ExPacketPlayOutEntityMetadata(ExtendedCraftEntity<?> entity, DataType type, boolean flag) {
-        this(entity.getExtension(), type, flag);
-    }
-
-    public ExPacketPlayOutEntityMetadata(ExEntity entity, DataType type) {
+    public ExPacketPlayOutEntityMetadata(Entity entity, DataType type) {
         if (type == DataType.UPDATE) {
-            super.packet = new PacketPlayOutEntityMetadata(entity.getId(), entity.getDataWatcher(), true);
+            super.packet = new PacketPlayOutEntityMetadata(entity.getEntityId(), new ExEntity(((CraftEntity) entity)).getDataWatcher(), true);
         }
     }
 
-    public ExPacketPlayOutEntityMetadata(ExEntity entity, DataType type, boolean flag) {
+    public ExPacketPlayOutEntityMetadata(Entity entity, DataType type, boolean flag) {
         if (type == DataType.UPDATE) {
-            super.packet = new PacketPlayOutEntityMetadata(entity.getId(), entity.getDataWatcher(), flag);
+            super.packet = new PacketPlayOutEntityMetadata(entity.getEntityId(), new ExEntity(((CraftEntity) entity)).getDataWatcher(), flag);
         }
     }
 
