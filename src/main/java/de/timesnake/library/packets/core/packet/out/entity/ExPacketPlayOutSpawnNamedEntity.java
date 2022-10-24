@@ -18,7 +18,6 @@
 
 package de.timesnake.library.packets.core.packet.out.entity;
 
-import de.timesnake.library.entities.entity.bukkit.ExPlayer;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
 import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutNamedEntitySpawn;
@@ -32,11 +31,6 @@ public class ExPacketPlayOutSpawnNamedEntity extends ExPacketPlayOut implements 
 
     public ExPacketPlayOutSpawnNamedEntity(Player player) {
         super.packet = new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle());
-        this.playerName = player.getName();
-    }
-
-    public ExPacketPlayOutSpawnNamedEntity(ExPlayer player) {
-        super.packet = new PacketPlayOutNamedEntitySpawn(player.getHandle());
         this.playerName = player.getName();
     }
 
