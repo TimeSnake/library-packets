@@ -30,7 +30,7 @@ dependencies {
 
 group = project.group
 version = '1.0-SNAPSHOT'
-description = 'library-packets'
+archivesBaseName = 'library-packets'
 java.sourceCompatibility = 1.17
 java.targetCompatibility = 1.17
 
