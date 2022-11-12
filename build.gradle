@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly project(':library-entities:library-entities')
+    compileOnly project(':library-entities')
     compileOnly project(':library-reflection')
     implementation project(':library-basic')
 
