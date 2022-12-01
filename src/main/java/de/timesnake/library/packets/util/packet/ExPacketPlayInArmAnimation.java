@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -18,7 +18,7 @@
 
 package de.timesnake.library.packets.util.packet;
 
-import de.timesnake.library.reflection.wrapper.ExEnumHand;
+import de.timesnake.library.entities.wrapper.ExEnumHand;
 
 public interface ExPacketPlayInArmAnimation extends ExPacketPlayIn {
     ExEnumHand getHand();

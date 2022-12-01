@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -18,7 +18,6 @@
 
 package de.timesnake.library.packets.core;
 
-import de.timesnake.library.reflection.NmsReflection;
 import io.netty.channel.Channel;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.network.PlayerConnection;
@@ -27,7 +26,6 @@ import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
-@NmsReflection
 public class BukkitNmsParser {
 
     public static ItemStack parseItem(org.bukkit.inventory.ItemStack item) {

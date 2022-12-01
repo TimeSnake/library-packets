@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -20,8 +20,7 @@ package de.timesnake.library.packets.core.packet.out.scoreboard;
 
 import com.mojang.authlib.GameProfile;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.RefUtil;
+import de.timesnake.library.reflection.Util;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketPlayOutPlayerInfo;
 import net.minecraft.server.level.EntityPlayer;
@@ -32,12 +31,12 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-@NmsReflection(usesReflection = true)
+
 public abstract class ExPacketPlayOutTablistPlayer extends ExPacketPlayOutTablist implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistPlayer {
 
     public static ExPacketPlayOut getPacket(PacketPlayOutPlayerInfo packet) {
         PacketPlayOutPlayerInfo.EnumPlayerInfoAction type =
-                (PacketPlayOutPlayerInfo.EnumPlayerInfoAction) RefUtil.getInstanceField(packet, "a");
+                (PacketPlayOutPlayerInfo.EnumPlayerInfoAction) Util.getInstanceField(packet, "a");
 
         if (type.equals(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a)) {
             List<Player> players = getFieldPlayers(packet);
@@ -57,11 +56,11 @@ public abstract class ExPacketPlayOutTablistPlayer extends ExPacketPlayOutTablis
 
         List<Player> players = new ArrayList<>();
 
-        List<?> list = (List<?>) RefUtil.getInstanceField(packet, "b");
+        List<?> list = (List<?>) Util.getInstanceField(packet, "b");
 
         for (Object info : list) {
 
-            GameProfile gameProfile = (GameProfile) RefUtil.getInstanceField(info, "c");
+            GameProfile gameProfile = (GameProfile) Util.getInstanceField(info, "c");
 
             Player player = Bukkit.getPlayer(gameProfile.getId());
 

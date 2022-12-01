@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -18,11 +18,9 @@
 
 package de.timesnake.library.packets.core.packet.in;
 
-import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.wrapper.ExEnumHand;
+import de.timesnake.library.entities.wrapper.ExEnumHand;
 import net.minecraft.network.protocol.game.PacketPlayInArmAnimation;
 
-@NmsReflection
 public class ExPacketPlayInArmAnimation extends ExPacketPlayIn implements de.timesnake.library.packets.util.packet.ExPacketPlayInArmAnimation {
 
     public ExPacketPlayInArmAnimation(PacketPlayInArmAnimation packet) {

@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -18,11 +18,9 @@
 
 package de.timesnake.library.packets.core.packet.out.border;
 
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.server.level.WorldServer;
 import net.minecraft.world.level.border.WorldBorder;
 
-@NmsReflection
 public class PacketWorldBorder extends WorldBorder {
 
     public static PacketWorldBorder lerp(WorldServer worldServer, double newSize, double oldSize, long time) {

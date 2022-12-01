@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -20,21 +20,20 @@ package de.timesnake.library.packets.core.packet.out.scoreboard;
 
 import de.timesnake.library.packets.core.UnsupportedPacketException;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.RefUtil;
+import de.timesnake.library.reflection.Util;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardScore;
 import net.minecraft.server.ScoreboardServer;
 
-@NmsReflection(usesReflection = true)
+
 public abstract class ExPacketPlayOutSideboard extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutSideboard {
 
     public static ExPacketPlayOut getPacket(PacketPlayOutScoreboardScore packet) throws UnsupportedPacketException {
-        ScoreboardServer.Action type = (ScoreboardServer.Action) RefUtil.getInstanceField(packet, "d");
-        int line = (int) RefUtil.getInstanceField(packet, "c");
-        String text = (String) RefUtil.getInstanceField(packet, "a");
-        String scoreboardName = (String) RefUtil.getInstanceField(packet, "b");
+        ScoreboardServer.Action type = (ScoreboardServer.Action) Util.getInstanceField(packet, "d");
+        int line = (int) Util.getInstanceField(packet, "c");
+        String text = (String) Util.getInstanceField(packet, "a");
+        String scoreboardName = (String) Util.getInstanceField(packet, "b");
 
         if (type.equals(Action.CHANGE.getNms())) {
             return new ExPacketPlayOutSideboardScoreSet(scoreboardName, text, line);

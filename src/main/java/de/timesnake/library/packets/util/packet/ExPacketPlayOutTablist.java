@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -20,7 +20,6 @@ package de.timesnake.library.packets.util.packet;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.EntityPlayer;
@@ -32,7 +31,6 @@ import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
 import java.lang.reflect.Field;
 import java.util.UUID;
 
-@NmsReflection
 public interface ExPacketPlayOutTablist extends ExPacketPlayOut {
 
     static EntityPlayer newEntry(String name, Head head) {

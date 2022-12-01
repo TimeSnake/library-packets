@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -21,8 +21,7 @@ package de.timesnake.library.packets.core.packet.out.entity;
 import de.timesnake.library.entities.entity.bukkit.ExPlayer;
 import de.timesnake.library.entities.entity.extension.ExEntity;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.RefUtil;
+import de.timesnake.library.reflection.Util;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityMetadata;
 import net.minecraft.network.syncher.DataWatcher;
 import net.minecraft.network.syncher.DataWatcherObject;
@@ -33,7 +32,6 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-@NmsReflection
 public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityMetadata {
 
     public static ExPacketPlayOutEntityMetadata getPacket(PacketPlayOutEntityMetadata packet) {
@@ -82,7 +80,7 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
      * @return the cloned {@link ExPacketPlayOutEntityMetadata}
      */
     public ExPacketPlayOutEntityMetadata cloneByte() {
-        int entityId = (int) RefUtil.getInstanceField(packet, "a");
+        int entityId = (int) Util.getInstanceField(packet, "a");
         List<DataWatcher.Item<?>> itemList = new ArrayList<>();
 
         for (DataWatcher.Item<?> item : this.getFieldB()) {
@@ -101,7 +99,7 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
 
         PacketPlayOutEntityMetadata clonedPacket = new PacketPlayOutEntityMetadata(entityId, new DataWatcher(null),
                 true);
-        RefUtil.setInstanceField(clonedPacket, "b", itemList);
+        Util.setInstanceField(clonedPacket, "b", itemList);
         return new ExPacketPlayOutEntityMetadata(clonedPacket);
     }
 
@@ -111,7 +109,7 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
      * @return the cloned {@link ExPacketPlayOutEntityMetadata}
      */
     public ExPacketPlayOutEntityMetadata clonePose() {
-        int entityId = (int) RefUtil.getInstanceField(packet, "a");
+        int entityId = (int) Util.getInstanceField(packet, "a");
         List<DataWatcher.Item<?>> itemList = new ArrayList<>();
 
         for (DataWatcher.Item<?> item : this.getFieldB()) {
@@ -130,13 +128,13 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
 
         PacketPlayOutEntityMetadata clonedPacket = new PacketPlayOutEntityMetadata(entityId, new DataWatcher(null),
                 true);
-        RefUtil.setInstanceField(clonedPacket, "a", entityId);
-        RefUtil.setInstanceField(clonedPacket, "b", itemList);
+        Util.setInstanceField(clonedPacket, "a", entityId);
+        Util.setInstanceField(clonedPacket, "b", itemList);
         return new ExPacketPlayOutEntityMetadata(clonedPacket);
     }
 
     public Integer getEntityId() {
-        return (Integer) RefUtil.getInstanceField(packet, "a");
+        return (Integer) Util.getInstanceField(packet, "a");
     }
 
     public boolean setGlowing(boolean flag) {
@@ -147,11 +145,11 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         DataWatcher.Item<?> item = packetB.get(0);
         DataWatcherObject<?> itemA = item.a();
         if (itemA.a() == MetadataIndex.BASE.getIndex() && item.b() instanceof Byte) {
-            Byte itemB = (Byte) RefUtil.getInstanceField(item, "b");
+            Byte itemB = (Byte) Util.getInstanceField(item, "b");
             if (flag) {
-                RefUtil.setInstanceField(item, "b", ((byte) (itemB | 0x40)));
+                Util.setInstanceField(item, "b", ((byte) (itemB | 0x40)));
             } else {
-                RefUtil.setInstanceField(item, "b", ((byte) (itemB & ~0x40)));
+                Util.setInstanceField(item, "b", ((byte) (itemB & ~0x40)));
             }
             return true;
         }
@@ -166,12 +164,12 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         DataWatcher.Item<?> item = packetB.get(0);
         DataWatcherObject<?> itemA = item.a();
         if (itemA.a() == MetadataIndex.BASE.getIndex() && item.b() instanceof Byte) {
-            Byte itemB = (Byte) RefUtil.getInstanceField(item, "b");
+            Byte itemB = (Byte) Util.getInstanceField(item, "b");
             if ((itemB & 0x80) != 0x80 && flag) {
-                RefUtil.setInstanceField(item, "b", ((byte) (itemB | 0x80)));
+                Util.setInstanceField(item, "b", ((byte) (itemB | 0x80)));
                 return true;
             } else {
-                RefUtil.setInstanceField(item, "b", ((byte) (itemB & ~0x80)));
+                Util.setInstanceField(item, "b", ((byte) (itemB & ~0x80)));
                 return !flag;
             }
         }
@@ -186,14 +184,14 @@ public class ExPacketPlayOutEntityMetadata extends ExPacketPlayOut implements de
         DataWatcher.Item<?> item = packetB.get(0);
         DataWatcherObject<?> itemA = item.a();
         if (itemA.a() == MetadataIndex.POSE.getIndex() && item.b() instanceof EntityPose) {
-            RefUtil.setInstanceField(item, "b", pose.getPose());
+            Util.setInstanceField(item, "b", pose.getPose());
             return true;
         }
         return false;
     }
 
     private List<DataWatcher.Item<?>> getFieldB() {
-        return (List<DataWatcher.Item<?>>) RefUtil.getInstanceField(super.packet, "b");
+        return (List<DataWatcher.Item<?>>) Util.getInstanceField(super.packet, "b");
     }
 
     @Override

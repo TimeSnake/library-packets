@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -20,11 +20,9 @@ package de.timesnake.library.packets.core.packet.out.entity;
 
 import de.timesnake.library.entities.entity.extension.ExEntityLiving;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutEntity;
 import org.bukkit.entity.LivingEntity;
 
-@NmsReflection
 public class ExPacketPlayOutEntityRelMoveLook extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityRelMoveLook {
 
     public ExPacketPlayOutEntityRelMoveLook(LivingEntity entity, double deltaX, double deltaY, double deltaZ,

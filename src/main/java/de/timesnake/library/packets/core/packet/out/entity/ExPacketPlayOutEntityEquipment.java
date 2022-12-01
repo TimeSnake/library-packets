@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -20,10 +20,9 @@ package de.timesnake.library.packets.core.packet.out.entity;
 
 import com.mojang.datafixers.util.Pair;
 import de.timesnake.library.basic.util.Tuple;
+import de.timesnake.library.entities.wrapper.ExEnumItemSlot;
 import de.timesnake.library.packets.core.BukkitNmsParser;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.wrapper.ExEnumItemSlot;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityEquipment;
 import net.minecraft.world.entity.EnumItemSlot;
 import org.bukkit.entity.Entity;
@@ -33,7 +32,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-@NmsReflection
 public class ExPacketPlayOutEntityEquipment extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityEquipment {
 
     public static ExPacketPlayOut getPacket(PacketPlayOutEntityEquipment packet) {

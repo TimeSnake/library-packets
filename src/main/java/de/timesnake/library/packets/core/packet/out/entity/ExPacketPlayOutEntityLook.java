@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -19,11 +19,9 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutEntity;
 import org.bukkit.entity.Entity;
 
-@NmsReflection
 public class ExPacketPlayOutEntityLook extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityLook {
 
     public static ExPacketPlayOutEntityLook getPacket(PacketPlayOutEntity.PacketPlayOutEntityLook packet) {

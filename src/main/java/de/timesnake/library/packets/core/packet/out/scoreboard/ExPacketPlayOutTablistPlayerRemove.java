@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -20,12 +20,10 @@ package de.timesnake.library.packets.core.packet.out.scoreboard;
 
 import de.timesnake.library.entities.entity.bukkit.ExPlayer;
 import de.timesnake.library.packets.util.packet.ExPacketPlayOutTablist;
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutPlayerInfo;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-@NmsReflection
 public class ExPacketPlayOutTablistPlayerRemove extends ExPacketPlayOutTablistPlayer implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistPlayerRemove {
 
     public ExPacketPlayOutTablistPlayerRemove(ExPlayer entityPlayer) {

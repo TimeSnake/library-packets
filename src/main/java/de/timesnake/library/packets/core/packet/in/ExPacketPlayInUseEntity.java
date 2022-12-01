@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -19,11 +19,9 @@
 package de.timesnake.library.packets.core.packet.in;
 
 import de.timesnake.library.packets.core.ExPacket;
-import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.RefUtil;
+import de.timesnake.library.reflection.Util;
 import net.minecraft.network.protocol.game.PacketPlayInUseEntity;
 
-@NmsReflection(usesReflection = true)
 public class ExPacketPlayInUseEntity extends ExPacketPlayIn implements de.timesnake.library.packets.util.packet.ExPacketPlayInUseEntity {
 
     public ExPacketPlayInUseEntity(PacketPlayInUseEntity packet) {
@@ -32,12 +30,12 @@ public class ExPacketPlayInUseEntity extends ExPacketPlayIn implements de.timesn
 
     @Override
     public UseType getUseType() {
-        Object type = RefUtil.invokeMethod(RefUtil.getInstanceField(this.packet, "b"), "a");
-        if (RefUtil.invokeMethod(type, "name").equals("INTERACT")) {
+        Object type = Util.invokeMethod(Util.getInstanceField(this.packet, "b"), "a");
+        if (Util.invokeMethod(type, "name").equals("INTERACT")) {
             return UseType.INTERACT;
-        } else if (RefUtil.invokeMethod(type, "name").equals("ATTACK")) {
+        } else if (Util.invokeMethod(type, "name").equals("ATTACK")) {
             return UseType.ATTACK;
-        } else if (RefUtil.invokeMethod(type, "name").equals("INTERACT_AT")) {
+        } else if (Util.invokeMethod(type, "name").equals("INTERACT_AT")) {
             return UseType.INTERACT_AT;
         }
         return null;
