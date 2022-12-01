@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -18,10 +18,8 @@
 
 package de.timesnake.library.packets.core.packet.out.scoreboard;
 
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardScore;
 
-@NmsReflection
 public class ExPacketPlayOutSideboardScoreSet extends ExPacketPlayOutSideboard implements de.timesnake.library.packets.util.packet.ExPacketPlayOutSideboardScoreSet {
 
     public ExPacketPlayOutSideboardScoreSet(String sideboardName, String text, int line) {

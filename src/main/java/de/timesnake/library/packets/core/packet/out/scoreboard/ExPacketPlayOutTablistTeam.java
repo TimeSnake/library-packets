@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -20,8 +20,7 @@ package de.timesnake.library.packets.core.packet.out.scoreboard;
 
 import de.timesnake.library.packets.core.UnsupportedPacketException;
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
-import de.timesnake.library.reflection.RefUtil;
+import de.timesnake.library.reflection.Util;
 import net.minecraft.EnumChatFormat;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.protocol.Packet;
@@ -31,29 +30,29 @@ import org.bukkit.ChatColor;
 import java.util.Collection;
 import java.util.Optional;
 
-@NmsReflection(usesReflection = true)
+
 public abstract class ExPacketPlayOutTablistTeam extends ExPacketPlayOutTablist
         implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistTeam {
 
     public static ExPacketPlayOut getPacket(PacketPlayOutScoreboardTeam packet) throws UnsupportedPacketException {
-        String name = (String) RefUtil.getInstanceField(packet, "i");
-        int type = (int) RefUtil.getInstanceField(packet, "h");
+        String name = (String) Util.getInstanceField(packet, "i");
+        int type = (int) Util.getInstanceField(packet, "h");
 
         if (type == 0) {
             String prefix =
-                    ((Optional<PacketPlayOutScoreboardTeam.b>) RefUtil.getInstanceField(packet, "k")).get().f().getString();
+                    ((Optional<PacketPlayOutScoreboardTeam.b>) Util.getInstanceField(packet, "k")).get().f().getString();
             return new ExPacketPlayOutTablistTeamCreation(packet, name, prefix);
         } else if (type == 1) {
             return new ExPacketPlayOutTablistTeamRemove(name);
         } else if (type == 2) {
             String prefix =
-                    ((Optional<PacketPlayOutScoreboardTeam.b>) RefUtil.getInstanceField(packet, "k")).get().f().getString();
+                    ((Optional<PacketPlayOutScoreboardTeam.b>) Util.getInstanceField(packet, "k")).get().f().getString();
             return new ExPacketPlayOutTablistTeamUpdate(name, prefix);
         } else if (type == 3) {
-            Collection<String> entries = (Collection<String>) RefUtil.getInstanceField(packet, "j");
+            Collection<String> entries = (Collection<String>) Util.getInstanceField(packet, "j");
             return new ExPacketPlayOutTablistTeamPlayerAdd(name, entries.iterator().next());
         } else if (type == 4) {
-            Collection<String> entries = (Collection<String>) RefUtil.getInstanceField(packet, "j");
+            Collection<String> entries = (Collection<String>) Util.getInstanceField(packet, "j");
             return new ExPacketPlayOutTablistTeamPlayerRemove(name, entries.iterator().next());
         }
         throw new UnsupportedPacketException(packet);

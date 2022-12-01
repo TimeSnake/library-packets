@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -19,12 +19,10 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutSpawnEntity;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 
-@NmsReflection
 public class ExPacketPlayOutSpawnEntity extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutSpawnEntity {
 
     public ExPacketPlayOutSpawnEntity(Entity entity) {

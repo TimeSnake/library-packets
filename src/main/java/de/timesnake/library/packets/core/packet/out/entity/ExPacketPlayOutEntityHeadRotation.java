@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -19,11 +19,9 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityHeadRotation;
 import net.minecraft.world.entity.Entity;
 
-@NmsReflection
 public class ExPacketPlayOutEntityHeadRotation extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityHeadRotation {
 
     public static ExPacketPlayOutEntityHeadRotation getPacket(PacketPlayOutEntityHeadRotation packet) {

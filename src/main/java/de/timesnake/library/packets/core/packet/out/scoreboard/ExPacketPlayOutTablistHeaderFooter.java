@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -19,11 +19,9 @@
 package de.timesnake.library.packets.core.packet.out.scoreboard;
 
 import de.timesnake.library.packets.core.packet.out.ExPacketPlayOut;
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.PacketPlayOutPlayerListHeaderFooter;
 
-@NmsReflection
 public class ExPacketPlayOutTablistHeaderFooter extends ExPacketPlayOutTablist implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistHeaderFooter {
 
     public static ExPacketPlayOut getPacket(PacketPlayOutPlayerListHeaderFooter packet) {

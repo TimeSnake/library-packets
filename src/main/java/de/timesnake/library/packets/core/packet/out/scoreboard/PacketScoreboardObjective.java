@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -18,12 +18,10 @@
 
 package de.timesnake.library.packets.core.packet.out.scoreboard;
 
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.world.scores.ScoreboardObjective;
 import net.minecraft.world.scores.criteria.IScoreboardCriteria;
 
-@NmsReflection
 public class PacketScoreboardObjective extends ScoreboardObjective {
 
     public PacketScoreboardObjective(String name, IChatBaseComponent title,

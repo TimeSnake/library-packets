@@ -1,5 +1,5 @@
 /*
- * library-packets.main
+ * workspace.library-packets.main
  * Copyright (C) 2022 timesnake
  *
  * This program is free software; you can redistribute it and/or
@@ -18,13 +18,11 @@
 
 package de.timesnake.library.packets.core.packet.out.scoreboard;
 
-import de.timesnake.library.reflection.NmsReflection;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardTeam;
 import net.minecraft.world.scores.ScoreboardTeam;
 
 import javax.annotation.Nonnull;
 
-@NmsReflection
 public class ExPacketPlayOutTablistTeamPlayerAdd extends ExPacketPlayOutTablistTeam implements de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistTeamPlayerAdd {
 
     private final String entry;
