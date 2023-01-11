@@ -9,9 +9,11 @@ import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.game.PacketPlayOutScoreboardObjective;
 import net.minecraft.world.scores.ScoreboardObjective;
 
-public class ExPacketPlayOutScoreboardObjective extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutScoreboardObjective {
+public class ExPacketPlayOutScoreboardObjective extends ExPacketPlayOut implements
+        de.timesnake.library.packets.util.packet.ExPacketPlayOutScoreboardObjective {
 
-    public static ExPacketPlayOutScoreboardObjective getPacket(PacketPlayOutScoreboardObjective packet) {
+    public static ExPacketPlayOutScoreboardObjective getPacket(
+            PacketPlayOutScoreboardObjective packet) {
         return new ExPacketPlayOutScoreboardObjective(packet);
     }
 
@@ -24,8 +26,9 @@ public class ExPacketPlayOutScoreboardObjective extends ExPacketPlayOut implemen
     }
 
     public ExPacketPlayOutScoreboardObjective(String name, String title, Display display,
-                                              ExPacketPlayOutScoreboardObjective.ScoreboardType type) {
-        ScoreboardObjective sb = new PacketScoreboardObjective(name, IChatBaseComponent.a(title), type.getType());
+            ExPacketPlayOutScoreboardObjective.ScoreboardType type) {
+        ScoreboardObjective sb = new PacketScoreboardObjective(name,
+                IChatBaseComponent.a(title), type != null ? type.getType() : null);
 
         super.packet = new PacketPlayOutScoreboardObjective(sb, display.getDisplay());
 
@@ -35,7 +38,8 @@ public class ExPacketPlayOutScoreboardObjective extends ExPacketPlayOut implemen
 
     @Override
     public String getInfo() {
-        return "objective: " + this.name + " " + this.display != null ? this.display.name().toLowerCase() : "";
+        return "objective: " + this.name + " " + this.display != null ? this.display.name()
+                .toLowerCase() : "";
     }
 
     @Override
