@@ -15,6 +15,7 @@ dependencies {
     compileOnly project(':library-entities')
     compileOnly project(':library-reflection')
     implementation project(':library-basic')
+    implementation project(':library-chat')
 
     compileOnly project.paper_api
     compileOnly project.spigot_api
