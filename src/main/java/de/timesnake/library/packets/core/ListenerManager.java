@@ -11,12 +11,15 @@ import de.timesnake.library.packets.util.listener.PacketPlayOutListener;
 import de.timesnake.library.packets.util.packet.ExPacket;
 import de.timesnake.library.packets.util.packet.ExPacketPlayIn;
 import de.timesnake.library.packets.util.packet.ExPacketPlayOut;
-import org.bukkit.entity.Player;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import org.bukkit.entity.Player;
 
 public class ListenerManager {
 
@@ -48,8 +51,10 @@ public class ListenerManager {
                     de.timesnake.library.packets.util.packet.ExPacket.Type[] methodTypes = annotation.type();
                     for (de.timesnake.library.packets.util.packet.ExPacket.Type type : methodTypes) {
 
-                        if (!ExPacketPlayOut.class.isAssignableFrom(method.getParameterTypes()[0]) || !method.getParameterTypes()[1].equals(Player.class)) {
-                            throw new InconsistentPacketListenerException("invalid parameter-types");
+                        if (!ExPacketPlayOut.class.isAssignableFrom(method.getParameterTypes()[0])
+                                || !method.getParameterTypes()[1].equals(Player.class)) {
+                            throw new InconsistentPacketListenerException(
+                                    "invalid parameter-types");
                         }
 
                         this.addMethod(listener, method, type, annotation.modify());
@@ -64,13 +69,15 @@ public class ListenerManager {
     }
 
     private void addMethod(PacketPlayOutListener listener, Method method,
-                           de.timesnake.library.packets.util.packet.ExPacket.Type type, boolean modify) {
+            de.timesnake.library.packets.util.packet.ExPacket.Type type, boolean modify) {
         if (!type.hasSubTypes()) {
             if (modify) {
-                this.modifyPlayOutListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener, k -> new HashSet<>()).add(method);
+                this.modifyPlayOutListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>())
+                        .computeIfAbsent(listener, k -> new HashSet<>()).add(method);
             } else {
-                this.playOutListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener,
-                        k -> new HashSet<>()).add(method);
+                this.playOutListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>())
+                        .computeIfAbsent(listener,
+                                k -> new HashSet<>()).add(method);
             }
             return;
         }
@@ -97,8 +104,10 @@ public class ListenerManager {
                     de.timesnake.library.packets.util.packet.ExPacket.Type[] methodTypes = annotation.type();
                     for (de.timesnake.library.packets.util.packet.ExPacket.Type type : methodTypes) {
 
-                        if (!ExPacketPlayIn.class.isAssignableFrom(method.getParameterTypes()[0]) || !method.getParameterTypes()[1].equals(Player.class)) {
-                            throw new InconsistentPacketListenerException("invalid parameter-types");
+                        if (!ExPacketPlayIn.class.isAssignableFrom(method.getParameterTypes()[0])
+                                || !method.getParameterTypes()[1].equals(Player.class)) {
+                            throw new InconsistentPacketListenerException(
+                                    "invalid parameter-types");
                         }
 
                         this.addMethod(listener, method, type, annotation.modify());
@@ -113,13 +122,15 @@ public class ListenerManager {
     }
 
     private void addMethod(PacketPlayInListener listener, Method method,
-                           de.timesnake.library.packets.util.packet.ExPacket.Type type, boolean modify) {
+            de.timesnake.library.packets.util.packet.ExPacket.Type type, boolean modify) {
         if (!type.hasSubTypes()) {
             if (modify) {
-                this.modifyPlayInListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener, k -> new HashSet<>()).add(method);
+                this.modifyPlayInListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>())
+                        .computeIfAbsent(listener, k -> new HashSet<>()).add(method);
             } else {
-                this.playInListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>()).computeIfAbsent(listener,
-                        k -> new HashSet<>()).add(method);
+                this.playInListeners.computeIfAbsent(type, k -> new ConcurrentHashMap<>())
+                        .computeIfAbsent(listener,
+                                k -> new HashSet<>()).add(method);
             }
             return;
         }
@@ -130,10 +141,16 @@ public class ListenerManager {
     }
 
     public void removeListener(PacketPlayOutListener listener,
-                               de.timesnake.library.packets.util.packet.ExPacket.Type... types) {
+            de.timesnake.library.packets.util.packet.ExPacket.Type... types) {
         List<ConcurrentHashMap<PacketPlayOutListener, Set<Method>>> listeners =
-                this.playOutListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList();
-        listeners.addAll(this.modifyPlayOutListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList());
+                this.playOutListeners.entrySet().stream()
+                        .filter(t -> types.length == 0 || Arrays.stream(types)
+                                .anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue)
+                        .toList();
+        listeners.addAll(this.modifyPlayOutListeners.entrySet().stream()
+                .filter(t -> types.length == 0 || Arrays.stream(types)
+                        .anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue)
+                .toList());
 
         for (ConcurrentHashMap<PacketPlayOutListener, ?> listenerMethods : listeners) {
             listenerMethods.remove(listener);
@@ -142,8 +159,14 @@ public class ListenerManager {
 
     public void removeListener(PacketPlayInListener listener, ExPacket.Type... types) {
         List<ConcurrentHashMap<PacketPlayInListener, Set<Method>>> listeners =
-                this.playInListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList();
-        listeners.addAll(this.modifyPlayInListeners.entrySet().stream().filter(t -> types.length == 0 || Arrays.stream(types).anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue).toList());
+                this.playInListeners.entrySet().stream()
+                        .filter(t -> types.length == 0 || Arrays.stream(types)
+                                .anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue)
+                        .toList();
+        listeners.addAll(this.modifyPlayInListeners.entrySet().stream()
+                .filter(t -> types.length == 0 || Arrays.stream(types)
+                        .anyMatch(type -> t.getKey().equals(type))).map(Map.Entry::getValue)
+                .toList());
 
         for (ConcurrentHashMap<PacketPlayInListener, ?> listenerMethods : listeners) {
             listenerMethods.remove(listener);
@@ -160,7 +183,8 @@ public class ListenerManager {
 
         new Thread(() -> {
             Set<Map.Entry<PacketPlayOutListener, Set<Method>>> set =
-                    this.playOutListeners.getOrDefault(finalPacket.getType(), new ConcurrentHashMap<>()).entrySet();
+                    this.playOutListeners.getOrDefault(finalPacket.getType(),
+                            new ConcurrentHashMap<>()).entrySet();
 
             for (Map.Entry<PacketPlayOutListener, Set<Method>> subSet : set) {
                 PacketPlayOutListener listener = subSet.getKey();
@@ -178,14 +202,16 @@ public class ListenerManager {
         boolean block = false;
 
         Set<Map.Entry<PacketPlayOutListener, Set<Method>>> set =
-                this.modifyPlayOutListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
+                this.modifyPlayOutListeners.getOrDefault(packet.getType(),
+                        new ConcurrentHashMap<>()).entrySet();
 
         for (Map.Entry<PacketPlayOutListener, Set<Method>> subSet : set) {
             PacketPlayOutListener listener = subSet.getKey();
 
             for (Method method : subSet.getValue()) {
                 try {
-                    ExPacketPlayOut editedPacket = (ExPacketPlayOut) method.invoke(listener, packet, receiver);
+                    ExPacketPlayOut editedPacket = (ExPacketPlayOut) method.invoke(listener, packet,
+                            receiver);
                     if (editedPacket == null) {
                         block = true;
                     } else {
@@ -209,7 +235,8 @@ public class ListenerManager {
         ExPacketPlayIn finalPacket = packet;
         new Thread(() -> {
             Set<Map.Entry<PacketPlayInListener, Set<Method>>> set =
-                    this.playInListeners.getOrDefault(finalPacket.getType(), new ConcurrentHashMap<>()).entrySet();
+                    this.playInListeners.getOrDefault(finalPacket.getType(),
+                            new ConcurrentHashMap<>()).entrySet();
 
             for (Map.Entry<PacketPlayInListener, Set<Method>> subSet : set) {
                 PacketPlayInListener listener = subSet.getKey();
@@ -227,14 +254,16 @@ public class ListenerManager {
         boolean block = false;
 
         Set<Map.Entry<PacketPlayInListener, Set<Method>>> set =
-                this.modifyPlayInListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>()).entrySet();
+                this.modifyPlayInListeners.getOrDefault(packet.getType(), new ConcurrentHashMap<>())
+                        .entrySet();
 
         for (Map.Entry<PacketPlayInListener, Set<Method>> subSet : set) {
             PacketPlayInListener listener = subSet.getKey();
 
             for (Method method : subSet.getValue()) {
                 try {
-                    ExPacketPlayIn editedPacket = (ExPacketPlayIn) method.invoke(listener, packet, sender);
+                    ExPacketPlayIn editedPacket = (ExPacketPlayIn) method.invoke(listener, packet,
+                            sender);
                     if (editedPacket == null) {
                         block = true;
                     } else {
