@@ -4,6 +4,7 @@
 
 package de.timesnake.library.packets.util;
 
+import de.timesnake.library.basic.util.Loggers;
 import de.timesnake.library.packets.core.BukkitNmsParser;
 import de.timesnake.library.packets.core.ListenerManager;
 import de.timesnake.library.packets.core.UnsupportedPacketException;
@@ -17,7 +18,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.ChannelPromise;
 import java.util.HashMap;
-import java.util.logging.Logger;
 import net.minecraft.network.protocol.Packet;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -30,8 +30,6 @@ import org.bukkit.plugin.PluginManager;
 
 public class PacketManager implements Listener {
 
-    public static final Logger LOGGER = de.timesnake.library.extension.util.chat.Plugin.PACKETS.getLogger();
-
     private final HashMap<Packet<?>, ExPacketPlayOut> sentPacketsByNMSPacket = new HashMap<>();
     private final ListenerManager listenerManager;
 
@@ -41,7 +39,7 @@ public class PacketManager implements Listener {
 
         this.listenerManager = new ListenerManager();
 
-        LOGGER.info("Loaded manager successfully");
+        Loggers.PACKETS.info("Loaded manager successfully");
     }
 
     public void addListener(PacketPlayOutListener listener) {
@@ -121,12 +119,13 @@ public class PacketManager implements Listener {
                                 ((Packet<?>) packet));
             } catch (UnsupportedPacketException ignored) {
             } catch (Exception e) {
-                LOGGER.info("Exception: " + e.getClass().getSimpleName() + " while transforming" +
-                        " play-in-packet");
+                Loggers.PACKETS.info(
+                        "Exception: " + e.getClass().getSimpleName() + " while transforming" +
+                                " play-in-packet");
             }
 
             if (packetPlayIn == null) {
-                LOGGER.info("PacketRead null");
+                Loggers.PACKETS.info("PacketRead null");
                 super.channelRead(channelHandlerContext, packet);
                 return;
             }
@@ -164,13 +163,13 @@ public class PacketManager implements Listener {
                                     ((Packet<?>) packet));
                 } catch (UnsupportedPacketException ignored) {
                 } catch (Exception e) {
-                    LOGGER.info("Exception: " + e.getClass().getSimpleName() + " while " +
+                    Loggers.PACKETS.info("Exception: " + e.getClass().getSimpleName() + " while " +
                             "transforming play-out-packet");
                 }
             }
 
             if (packetPlayOut == null) {
-                LOGGER.info("PacketWrite null: " + packet.getClass().getSimpleName());
+                Loggers.PACKETS.info("PacketWrite null: " + packet.getClass().getSimpleName());
                 super.write(channelHandlerContext, packet, channelPromise);
                 return;
             }
