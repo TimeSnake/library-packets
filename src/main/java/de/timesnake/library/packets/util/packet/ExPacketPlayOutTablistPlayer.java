@@ -8,5 +8,5 @@ import org.bukkit.entity.Player;
 
 public interface ExPacketPlayOutTablistPlayer extends ExPacketPlayOutTablist {
 
-    Player getPlayer();
+  Player getPlayer();
 }

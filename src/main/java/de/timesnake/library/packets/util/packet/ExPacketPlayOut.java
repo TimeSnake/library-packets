@@ -4,13 +4,12 @@
 
 package de.timesnake.library.packets.util.packet;
 
-import net.minecraft.network.protocol.Packet;
-
 import javax.annotation.Nonnull;
+import net.minecraft.network.protocol.Packet;
 
 public interface ExPacketPlayOut extends ExPacket {
 
-    @Nonnull
-    Packet<?> getPacket();
+  @Nonnull
+  Packet<?> getPacket();
 
 }

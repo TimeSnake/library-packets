@@ -14,20 +14,20 @@ import org.bukkit.entity.Player;
 
 public class BukkitNmsParser {
 
-    public static ItemStack parseItem(org.bukkit.inventory.ItemStack item) {
-        return CraftItemStack.asNMSCopy(item);
-    }
+  public static ItemStack parseItem(org.bukkit.inventory.ItemStack item) {
+    return CraftItemStack.asNMSCopy(item);
+  }
 
-    public static Channel getPlayerChannel(Player player) {
-        return getPlayerConnection(player).b.m;
-    }
+  public static Channel getPlayerChannel(Player player) {
+    return getPlayerConnection(player).b.m;
+  }
 
-    public static PlayerConnection getPlayerConnection(Player player) {
-        return ((CraftPlayer) player).getHandle().b;
-    }
+  public static PlayerConnection getPlayerConnection(Player player) {
+    return ((CraftPlayer) player).getHandle().b;
+  }
 
-    public static void sendPacket(Player player, Packet<?> packet) {
-        getPlayerConnection(player).a(packet);
-    }
+  public static void sendPacket(Player player, Packet<?> packet) {
+    getPlayerConnection(player).a(packet);
+  }
 
 }

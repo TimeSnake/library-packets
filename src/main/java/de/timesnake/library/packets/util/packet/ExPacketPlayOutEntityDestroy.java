@@ -8,7 +8,8 @@ import org.bukkit.entity.Entity;
 
 public interface ExPacketPlayOutEntityDestroy extends ExPacketPlayOut {
 
-    static ExPacketPlayOutEntityDestroy wrap(Entity entity) {
-        return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityDestroy(entity);
-    }
+  static ExPacketPlayOutEntityDestroy wrap(Entity entity) {
+    return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityDestroy(
+        entity);
+  }
 }

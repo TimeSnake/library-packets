@@ -8,39 +8,41 @@ import net.minecraft.world.scores.criteria.IScoreboardCriteria;
 
 public interface ExPacketPlayOutScoreboardObjective extends ExPacketPlayOut {
 
-    static ExPacketPlayOutScoreboardObjective wrap(String name, String title, Display display, ScoreboardType type) {
-        return new de.timesnake.library.packets.core.packet.out.scoreboard.ExPacketPlayOutScoreboardObjective(name,
-                title, display, type);
+  static ExPacketPlayOutScoreboardObjective wrap(String name, String title, Display display,
+      ScoreboardType type) {
+    return new de.timesnake.library.packets.core.packet.out.scoreboard.ExPacketPlayOutScoreboardObjective(
+        name,
+        title, display, type);
+  }
+
+  enum ScoreboardType {
+    INTEGER(IScoreboardCriteria.EnumScoreboardHealthDisplay.a),
+    HEARTS(IScoreboardCriteria.EnumScoreboardHealthDisplay.b);
+
+    private final IScoreboardCriteria.EnumScoreboardHealthDisplay type;
+
+    ScoreboardType(IScoreboardCriteria.EnumScoreboardHealthDisplay type) {
+      this.type = type;
     }
 
-    enum ScoreboardType {
-        INTEGER(IScoreboardCriteria.EnumScoreboardHealthDisplay.a),
-        HEARTS(IScoreboardCriteria.EnumScoreboardHealthDisplay.b);
+    public IScoreboardCriteria.EnumScoreboardHealthDisplay getType() {
+      return type;
+    }
+  }
 
-        private final IScoreboardCriteria.EnumScoreboardHealthDisplay type;
+  enum Display {
+    CREATE(0),
+    REMOVE(1),
+    UPDATE(2);
 
-        ScoreboardType(IScoreboardCriteria.EnumScoreboardHealthDisplay type) {
-            this.type = type;
-        }
+    private final int display;
 
-        public IScoreboardCriteria.EnumScoreboardHealthDisplay getType() {
-            return type;
-        }
+    Display(int display) {
+      this.display = display;
     }
 
-    enum Display {
-        CREATE(0),
-        REMOVE(1),
-        UPDATE(2);
-
-        private final int display;
-
-        Display(int display) {
-            this.display = display;
-        }
-
-        public int getDisplay() {
-            return display;
-        }
+    public int getDisplay() {
+      return display;
     }
+  }
 }

@@ -6,11 +6,11 @@ package de.timesnake.library.packets.util.packet;
 
 public interface ExPacketPlayInUseEntity extends ExPacketPlayIn {
 
-    UseType getUseType();
+  UseType getUseType();
 
-    enum UseType {
-        INTERACT,
-        ATTACK,
-        INTERACT_AT
-    }
+  enum UseType {
+    INTERACT,
+    ATTACK,
+    INTERACT_AT
+  }
 }

@@ -10,11 +10,13 @@ import org.bukkit.entity.Entity;
 
 public interface ExPacketPlayOutEntityHeadRotation extends ExPacketPlayOut {
 
-    static ExPacketPlayOutEntityHeadRotation wrap(Entity entity, float yaw) {
-        return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation(((CraftEntity) entity).getHandle(), yaw);
-    }
+  static ExPacketPlayOutEntityHeadRotation wrap(Entity entity, float yaw) {
+    return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation(
+        ((CraftEntity) entity).getHandle(), yaw);
+  }
 
-    static ExPacketPlayOutEntityHeadRotation wrap(ExEntity entity, float yaw) {
-        return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation(entity.getNMS(), yaw);
-    }
+  static ExPacketPlayOutEntityHeadRotation wrap(ExEntity entity, float yaw) {
+    return new de.timesnake.library.packets.core.packet.out.entity.ExPacketPlayOutEntityHeadRotation(
+        entity.getNMS(), yaw);
+  }
 }

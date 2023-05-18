@@ -5,7 +5,6 @@
 package de.timesnake.library.packets.util.listener;
 
 import de.timesnake.library.packets.util.packet.ExPacket;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,7 +14,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface PacketHandler {
 
-    ExPacket.Type[] type();
+  ExPacket.Type[] type();
 
-    boolean modify() default false;
+  boolean modify() default false;
 }

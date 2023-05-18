@@ -10,27 +10,30 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectList;
 import org.bukkit.entity.Player;
 
-public class ExPacketPlayOutEntityEffect extends ExPacketPlayOut implements de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityEffect {
+public class ExPacketPlayOutEntityEffect extends ExPacketPlayOut implements
+    de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityEffect {
 
-    public ExPacketPlayOutEntityEffect(Player p, Effect effect, byte amplifier, int duration, boolean ambient,
-                                       boolean showParticles, boolean showIcon) {
+  public ExPacketPlayOutEntityEffect(Player p, Effect effect, byte amplifier, int duration,
+      boolean ambient,
+      boolean showParticles, boolean showIcon) {
 
-        MobEffect mobEffect = new MobEffect(MobEffectList.a(effect.getId()), amplifier, duration, ambient,
-                showParticles, showIcon);
-        super.packet = new PacketPlayOutEntityEffect(p.getEntityId(), mobEffect);
-    }
+    MobEffect mobEffect = new MobEffect(MobEffectList.a(effect.getId()), amplifier, duration,
+        ambient,
+        showParticles, showIcon);
+    super.packet = new PacketPlayOutEntityEffect(p.getEntityId(), mobEffect);
+  }
 
-    public ExPacketPlayOutEntityEffect(PacketPlayOutEntityEffect packet) {
-        super(packet);
-    }
+  public ExPacketPlayOutEntityEffect(PacketPlayOutEntityEffect packet) {
+    super(packet);
+  }
 
-    @Override
-    public String getInfo() {
-        return "entity effect";
-    }
+  @Override
+  public String getInfo() {
+    return "entity effect";
+  }
 
-    @Override
-    public Type getType() {
-        return Type.PLAY_OUT_ENTITY_EFFECT;
-    }
+  @Override
+  public Type getType() {
+    return Type.PLAY_OUT_ENTITY_EFFECT;
+  }
 }
