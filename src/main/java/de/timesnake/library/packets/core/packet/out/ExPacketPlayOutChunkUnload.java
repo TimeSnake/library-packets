@@ -9,23 +9,23 @@ import net.minecraft.network.protocol.game.PacketPlayOutUnloadChunk;
 
 public class ExPacketPlayOutChunkUnload extends ExPacketPlayOut {
 
-    public ExPacketPlayOutChunkUnload(PacketPlayOutUnloadChunk packet) {
-        super(packet);
-    }
+  public ExPacketPlayOutChunkUnload(PacketPlayOutUnloadChunk packet) {
+    super(packet);
+  }
 
-    public Tuple<Integer, Integer> getChunkCoordinates() {
-        return new Tuple<>(((PacketPlayOutUnloadChunk) super.packet).b(),
-                ((PacketPlayOutUnloadChunk) super.packet).c());
-    }
+  public Tuple<Integer, Integer> getChunkCoordinates() {
+    return new Tuple<>(((PacketPlayOutUnloadChunk) super.packet).b(),
+        ((PacketPlayOutUnloadChunk) super.packet).c());
+  }
 
-    @Override
-    public String getInfo() {
-        Tuple<Integer, Integer> chunk = this.getChunkCoordinates();
-        return "x=" + chunk.getA() + " y=" + chunk.getB();
-    }
+  @Override
+  public String getInfo() {
+    Tuple<Integer, Integer> chunk = this.getChunkCoordinates();
+    return "x=" + chunk.getA() + " y=" + chunk.getB();
+  }
 
-    @Override
-    public Type getType() {
-        return Type.PLAY_OUT_CHUNK_UNLOAD;
-    }
+  @Override
+  public Type getType() {
+    return Type.PLAY_OUT_CHUNK_UNLOAD;
+  }
 }

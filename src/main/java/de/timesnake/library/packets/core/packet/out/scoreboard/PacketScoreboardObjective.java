@@ -10,12 +10,13 @@ import net.minecraft.world.scores.criteria.IScoreboardCriteria;
 
 public class PacketScoreboardObjective extends ScoreboardObjective {
 
-    public PacketScoreboardObjective(String name, IChatBaseComponent title,
-                                     IScoreboardCriteria.EnumScoreboardHealthDisplay type) {
-        super(null, name, null, title, type);
-    }
+  public PacketScoreboardObjective(String name, IChatBaseComponent title,
+      IScoreboardCriteria.EnumScoreboardHealthDisplay type) {
+    super(null, name, null, title, type);
+  }
 
-    public PacketScoreboardObjective(String name, IScoreboardCriteria.EnumScoreboardHealthDisplay type) {
-        super(null, name, null, IChatBaseComponent.a(""), type);
-    }
+  public PacketScoreboardObjective(String name,
+      IScoreboardCriteria.EnumScoreboardHealthDisplay type) {
+    super(null, name, null, IChatBaseComponent.a(""), type);
+  }
 }
