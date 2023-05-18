@@ -1,5 +1,11 @@
+group = project.group
+version = '1.0.1-SNAPSHOT'
+archivesBaseName = 'library-packets'
+var projectId = 33
+
 repositories {
   mavenLocal()
+  mavenCentral()
   maven {
     url = uri 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
   }
@@ -23,6 +29,14 @@ dependencies {
   compileOnly project.spigot
 }
 
-group = project.group
-version = '1.0.1-SNAPSHOT'
-archivesBaseName = 'library-packets'
+publishing {
+  repositories {
+    maven {
+      url getDeployUrl(projectId)
+      credentials {
+        username = deploy_token_name
+        password = deploy_token_key
+      }
+    }
+  }
+}
