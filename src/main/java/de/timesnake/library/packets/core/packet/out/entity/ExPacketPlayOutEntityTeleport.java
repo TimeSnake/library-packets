@@ -13,27 +13,27 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class ExPacketPlayOutEntityTeleport extends ExPacketPlayOut implements
-    de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityTeleport {
+		de.timesnake.library.packets.util.packet.ExPacketPlayOutEntityTeleport {
 
-  public ExPacketPlayOutEntityTeleport(Player player) {
-    super(new PacketPlayOutEntityTeleport(((CraftPlayer) player).getHandle()));
-  }
+	public ExPacketPlayOutEntityTeleport(Player player) {
+		super(new PacketPlayOutEntityTeleport(((CraftPlayer) player).getHandle()));
+	}
 
-  public ExPacketPlayOutEntityTeleport(LivingEntity entity) {
-    super(new PacketPlayOutEntityTeleport(((CraftLivingEntity) entity).getHandle()));
-  }
+	public ExPacketPlayOutEntityTeleport(LivingEntity entity) {
+		super(new PacketPlayOutEntityTeleport(((CraftLivingEntity) entity).getHandle()));
+	}
 
-  public ExPacketPlayOutEntityTeleport(ExEntityLiving entity) {
-    super(new PacketPlayOutEntityTeleport(entity.getNMS()));
-  }
+	public ExPacketPlayOutEntityTeleport(ExEntityLiving entity) {
+		super(new PacketPlayOutEntityTeleport(entity.getNMS()));
+	}
 
-  @Override
-  public String getInfo() {
-    return null;
-  }
+	@Override
+	public String getInfo() {
+		return null;
+	}
 
-  @Override
-  public Type getType() {
-    return Type.PLAY_OUT_ENTITY_TELEPORT;
-  }
+	@Override
+	public Type getType() {
+		return Type.PLAY_OUT_ENTITY_TELEPORT;
+	}
 }
