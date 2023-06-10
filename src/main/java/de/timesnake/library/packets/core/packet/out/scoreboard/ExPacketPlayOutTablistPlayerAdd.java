@@ -11,39 +11,39 @@ import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class ExPacketPlayOutTablistPlayerAdd extends ExPacketPlayOutTablistPlayer implements
-    de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistPlayerAdd {
+		de.timesnake.library.packets.util.packet.ExPacketPlayOutTablistPlayerAdd {
 
-  public ExPacketPlayOutTablistPlayerAdd(EntityPlayer entityPlayers) {
-    super(
-        new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, entityPlayers),
-        entityPlayers);
-  }
+	public ExPacketPlayOutTablistPlayerAdd(EntityPlayer entityPlayers) {
+		super(
+				new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, entityPlayers),
+				entityPlayers);
+	}
 
-  public ExPacketPlayOutTablistPlayerAdd(Player player) {
-    super(player);
-    super.packet = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a,
-        ((CraftPlayer) player).getHandle());
-  }
+	public ExPacketPlayOutTablistPlayerAdd(Player player) {
+		super(player);
+		super.packet = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a,
+				((CraftPlayer) player).getHandle());
+	}
 
-  public ExPacketPlayOutTablistPlayerAdd(String name, Head head) {
-    super(ExPacketPlayOutTablist.newEntry(name, head).getBukkitEntity());
-    super.packet = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a,
-        ((CraftPlayer) super.player).getHandle());
-  }
+	public ExPacketPlayOutTablistPlayerAdd(String name, Head head) {
+		super(ExPacketPlayOutTablist.newEntry(name, head).getBukkitEntity());
+		super.packet = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a,
+				((CraftPlayer) super.player).getHandle());
+	}
 
-  public ExPacketPlayOutTablistPlayerAdd(PacketPlayOutPlayerInfo packet, Player player) {
-    super(player);
-    super.packet = packet;
-  }
+	public ExPacketPlayOutTablistPlayerAdd(PacketPlayOutPlayerInfo packet, Player player) {
+		super(player);
+		super.packet = packet;
+	}
 
-  @Override
-  public Type getType() {
-    return Type.PLAY_OUT_TABLIST_PLAYER_ADD;
-  }
+	@Override
+	public Type getType() {
+		return Type.PLAY_OUT_TABLIST_PLAYER_ADD;
+	}
 
-  @Override
-  public String getInfo() {
-    return "player: " + this.player.getName() + " " + this.player.getPlayerListName() + " add";
-  }
+	@Override
+	public String getInfo() {
+		return "player: " + this.player.getName() + " " + this.player.getPlayerListName() + " add";
+	}
 }
 

@@ -10,22 +10,22 @@ import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class ExPacketPlayOutSpawnNamedEntity extends ExPacketPlayOut implements
-    de.timesnake.library.packets.util.packet.ExPacketPlayOutSpawnNamedEntity {
+		de.timesnake.library.packets.util.packet.ExPacketPlayOutSpawnNamedEntity {
 
-  private final String playerName;
+	private final String playerName;
 
-  public ExPacketPlayOutSpawnNamedEntity(Player player) {
-    super.packet = new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle());
-    this.playerName = player.getName();
-  }
+	public ExPacketPlayOutSpawnNamedEntity(Player player) {
+		super.packet = new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle());
+		this.playerName = player.getName();
+	}
 
-  @Override
-  public String getInfo() {
-    return this.playerName;
-  }
+	@Override
+	public String getInfo() {
+		return this.playerName;
+	}
 
-  @Override
-  public Type getType() {
-    return Type.PLAY_OUT_SPAWN_NAMED_ENTITY;
-  }
+	@Override
+	public Type getType() {
+		return Type.PLAY_OUT_SPAWN_NAMED_ENTITY;
+	}
 }
