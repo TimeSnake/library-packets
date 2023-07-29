@@ -31,9 +31,17 @@ public class ClientboundSetEntityDataPacketBuilder {
     return new ClientboundSetEntityDataPacket(entity.getId(), packedItems);
   }
 
-  public ClientboundSetEntityDataPacketBuilder update() {
+  public ClientboundSetEntityDataPacketBuilder setFlagsFromEntity() {
     this.entity.getEntityData().markDirty(DATA_SHARED_FLAGS_ID);
     this.packedItems = this.entity.getEntityData().packDirty();
+    return this;
+  }
+
+  public ClientboundSetEntityDataPacketBuilder setDefaultFlags() {
+    this.packedItems = new LinkedList<>();
+    for (Type type : Type.values()) {
+      this.setFlag(type, false);
+    }
     return this;
   }
 
@@ -61,6 +69,10 @@ public class ClientboundSetEntityDataPacketBuilder {
     this.packedItems.add(SynchedEntityData.DataValue.create(DATA_SHARED_FLAGS_ID, b));
   }
 
+  public static boolean isPosePacket(ClientboundSetEntityDataPacket packet) {
+    return packet.packedItems().stream().anyMatch(v -> v.id() == DATA_SHARED_FLAGS_ID.getId());
+  }
+
   public static Boolean getFlagOfPacket(ClientboundSetEntityDataPacket packet, Type type) {
     return getSharedFlag(packet, type.getIndex());
   }
@@ -85,7 +97,7 @@ public class ClientboundSetEntityDataPacketBuilder {
       return null;
     }
 
-    return (b & 1 << index) == 1;
+    return ((b >> index) & 1) == 1;
   }
 
   public enum Type {
