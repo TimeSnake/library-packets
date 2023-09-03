@@ -101,7 +101,7 @@ public class ClientboundSetEntityDataPacketBuilder {
   }
 
   public enum Type {
-    ON_FIRE(0), SNEAKING(1), SLEEPING(2), SPRINTING(3), VISIBLE(5), GLOWING(6), GLIDING(7);
+    ON_FIRE(0), SNEAKING(1), SLEEPING(2), SPRINTING(3), SWIMMING(4), VISIBLE(5), GLOWING(6), GLIDING(7);
 
     private final int index;
 
