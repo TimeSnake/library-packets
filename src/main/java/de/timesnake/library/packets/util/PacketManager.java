@@ -134,12 +134,6 @@ public class PacketManager implements Listener {
 
       Packet<ClientGamePacketListener> packetPlayOut = (Packet<ClientGamePacketListener>) packet;
 
-      if (packetPlayOut == null) {
-        Loggers.PACKETS.info("PacketWrite null: " + packet.getClass().getSimpleName());
-        super.write(channelHandlerContext, packet, channelPromise);
-        return;
-      }
-
       packetPlayOut = PacketManager.this.listenerManager.handleClientPacket(packetPlayOut, player);
 
       if (packetPlayOut == null) {
