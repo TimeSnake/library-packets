@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023 timesnake
+ */
+
 package de.timesnake.library.packets.core.packet.out.entity;
 
 import com.mojang.datafixers.util.Pair;
