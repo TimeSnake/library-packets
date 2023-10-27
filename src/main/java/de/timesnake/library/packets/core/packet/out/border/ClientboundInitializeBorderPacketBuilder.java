@@ -10,8 +10,7 @@ import org.bukkit.World;
 
 public class ClientboundInitializeBorderPacketBuilder {
 
-  public static ClientboundInitializeBorderPacket of(World world, double centerX, double centerZ,
-                                                     double startSize,
+  public static ClientboundInitializeBorderPacket of(World world, double centerX, double centerZ, double startSize,
                                                      double shrinkSize, long time, int warningDistance, int warningTime) {
     WorldBorder worldBorder = new WorldBorder() {
       @Override
