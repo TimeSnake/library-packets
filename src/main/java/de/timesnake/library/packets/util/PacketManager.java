@@ -78,11 +78,13 @@ public class PacketManager implements Listener {
 
     ChannelPipeline pipeline = BukkitNmsParser.getPlayerChannel(player).pipeline();
     pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
+    Loggers.PACKETS.info("Injected packet handler for '" + player.getName() + "'");
 
   }
 
   public void sendPacket(Player player, Packet<?> packet) {
     BukkitNmsParser.sendPacket(player, packet);
+    Loggers.PACKETS.info("Send to '" + player.getName() + "': " + packet.getClass().getSimpleName());
   }
 
   private class ChannelDuplexHandler extends io.netty.channel.ChannelDuplexHandler {
@@ -103,12 +105,6 @@ public class PacketManager implements Listener {
       }
 
       Packet<ServerGamePacketListener> packetPlayIn = (Packet<ServerGamePacketListener>) packet;
-
-      if (packetPlayIn == null) {
-        Loggers.PACKETS.info("PacketRead null");
-        super.channelRead(channelHandlerContext, packet);
-        return;
-      }
 
       packetPlayIn = PacketManager.this.listenerManager.handleServerPacket(packetPlayIn, player);
 
