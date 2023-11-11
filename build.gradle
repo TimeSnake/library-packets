@@ -8,7 +8,7 @@ plugins {
 
 
 group = project.group
-version = '2.1'
+version = '2.1.1'
 var projectId = 33
 
 java {
