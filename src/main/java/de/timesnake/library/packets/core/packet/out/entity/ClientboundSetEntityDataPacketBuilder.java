@@ -36,7 +36,7 @@ public class ClientboundSetEntityDataPacketBuilder {
 
   public ClientboundSetEntityDataPacketBuilder(Entity entity, ClientboundSetEntityDataPacket packet) {
     this.entity = entity;
-    this.packet = packet;
+    this.packet = new ClientboundSetEntityDataPacket(packet.id(), new LinkedList<>(packet.packedItems()));
   }
 
   public ClientboundSetEntityDataPacket build() {
