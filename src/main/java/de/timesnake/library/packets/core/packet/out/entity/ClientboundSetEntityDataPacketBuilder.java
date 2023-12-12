@@ -6,6 +6,8 @@ package de.timesnake.library.packets.core.packet.out.entity;
 
 import de.timesnake.library.basic.util.Tuple;
 import de.timesnake.library.entities.proxy.ProxyManager;
+import de.timesnake.library.entities.proxy.SynchedEntityDataProxy;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -13,10 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ClientboundSetEntityDataPacketBuilder {
@@ -25,6 +24,13 @@ public class ClientboundSetEntityDataPacketBuilder {
       ProxyManager.getInstance().getEntityProxy().getDataSharedFlagsIdDataAccessor();
   private static final EntityDataAccessor<Pose> POSE_ENTITY_DATA_ACCESSOR =
       ProxyManager.getInstance().getEntityProxy().getDataPoseDataAccessor();
+  private static final EntityDataAccessor<Optional<Component>> DATA_CUSTOM_NAME_DATA_ACCESSOR =
+      ProxyManager.getInstance().getEntityProxy().getCustomNameDataAccessor();
+  private static final EntityDataAccessor<Boolean> DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR =
+      ProxyManager.getInstance().getEntityProxy().getCustomNameVisibleDataAccessor();
+
+  private static final SynchedEntityDataProxy SYNCED_ENTITY_DATA_PROXY =
+      ProxyManager.getInstance().getSynchedEntityDataProxy();
 
   private final net.minecraft.world.entity.Entity entity;
   private final ClientboundSetEntityDataPacket packet;
@@ -43,6 +49,13 @@ public class ClientboundSetEntityDataPacketBuilder {
     return this.packet;
   }
 
+  public ClientboundSetEntityDataPacketBuilder setAllFromEntity() {
+    this.packet.packedItems().clear();
+    this.packet.packedItems().addAll(SYNCED_ENTITY_DATA_PROXY.getItemsById(this.entity.getEntityData()).values().stream()
+        .map(SynchedEntityData.DataItem::value).toList());
+    return this;
+  }
+
   public ClientboundSetEntityDataPacketBuilder setPoseFromEntity() {
     this.setPose(this.entity.getPose());
     return this;
@@ -51,6 +64,42 @@ public class ClientboundSetEntityDataPacketBuilder {
   public ClientboundSetEntityDataPacketBuilder setPose(Pose pose) {
     this.packet.packedItems().removeIf(i -> i.id() == POSE_ENTITY_DATA_ACCESSOR.getId());
     this.packet.packedItems().add(SynchedEntityData.DataValue.create(POSE_ENTITY_DATA_ACCESSOR, pose));
+    return this;
+  }
+
+  public ClientboundSetEntityDataPacketBuilder setCustomNameFromEntity() {
+    this.setCustomName(this.entity.getCustomName());
+    return this;
+  }
+
+  public ClientboundSetEntityDataPacketBuilder setCustomName(String name) {
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.getId());
+    this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_CUSTOM_NAME_DATA_ACCESSOR,
+        Optional.of(Component.literal(name))));
+    return this;
+  }
+
+  public ClientboundSetEntityDataPacketBuilder setCustomName(Component component) {
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.getId());
+    this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_CUSTOM_NAME_DATA_ACCESSOR,
+        Optional.of(component)));
+    return this;
+  }
+
+  public ClientboundSetEntityDataPacketBuilder resetCustomName() {
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.getId());
+    this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_CUSTOM_NAME_DATA_ACCESSOR, Optional.empty()));
+    return this;
+  }
+
+  public ClientboundSetEntityDataPacketBuilder setCustomNameVisibleFromEntity() {
+    this.setCustomNameVisible(this.entity.isCustomNameVisible());
+    return this;
+  }
+
+  public ClientboundSetEntityDataPacketBuilder setCustomNameVisible(Boolean flag) {
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR.getId());
+    this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR, flag));
     return this;
   }
 
