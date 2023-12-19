@@ -1,20 +1,17 @@
 plugins {
+  id 'java'
+  id 'java-base'
   id 'java-library'
   id 'maven-publish'
-  id('io.papermc.paperweight.userdev')
-  id('xyz.jpenilla.run-paper')
-  id('com.github.johnrengelman.shadow')
+  id("io.papermc.paperweight.userdev") version "1.5.5"
+  id("xyz.jpenilla.run-paper") version "2.1.0"
+  id('com.github.johnrengelman.shadow') version "8.1.1"
 }
 
 
 group = "de.timesnake"
 version = '2.1.1'
 var projectId = 33
-
-java {
-  // Configure the java toolchain. This allows gradle to auto-provision JDK 17 on systems that only have JDK 8 installed for example.
-  toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-}
 
 repositories {
   mavenLocal()
@@ -82,4 +79,12 @@ publishing {
       from components.java
     }
   }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.encoding = 'UTF-8'
+}
+
+java {
+  withSourcesJar()
 }
