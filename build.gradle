@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly "de.timesnake:library-entities:2.1"
+  compileOnly "de.timesnake:library-entities:2.2"
   compileOnly "de.timesnake:library-basic:1.2.2"
   compileOnly "de.timesnake:library-chat:1.1"
 
