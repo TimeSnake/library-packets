@@ -4,7 +4,6 @@
 
 package de.timesnake.library.packets.util;
 
-import de.timesnake.library.basic.util.Loggers;
 import de.timesnake.library.packets.core.BukkitNmsParser;
 import de.timesnake.library.packets.core.ListenerManager;
 import de.timesnake.library.packets.util.listener.PacketPlayInListener;
@@ -16,6 +15,8 @@ import io.netty.channel.ChannelPromise;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ServerGamePacketListener;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,8 @@ import org.bukkit.plugin.PluginManager;
 
 public class PacketManager implements Listener {
 
+  private final Logger logger = LogManager.getLogger("packet.manager");
+
   private final ListenerManager listenerManager;
 
   public PacketManager(Plugin plugin) {
@@ -35,7 +38,7 @@ public class PacketManager implements Listener {
 
     this.listenerManager = new ListenerManager();
 
-    Loggers.PACKETS.info("Loaded manager successfully");
+    this.logger.info("Loaded manager successfully");
   }
 
   public void addListener(PacketPlayOutListener listener) {
@@ -78,13 +81,13 @@ public class PacketManager implements Listener {
 
     ChannelPipeline pipeline = BukkitNmsParser.getPlayerChannel(player).pipeline();
     pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
-    Loggers.PACKETS.info("Injected packet handler for '" + player.getName() + "'");
+    this.logger.info("Injected packet handler for '{}'", player.getName());
 
   }
 
   public void sendPacket(Player player, Packet<?> packet) {
     BukkitNmsParser.sendPacket(player, packet);
-    Loggers.PACKETS.info("Send to '" + player.getName() + "': " + packet.getClass().getSimpleName());
+    this.logger.info("Send to '{}: {}'", player.getName(), packet.getClass().getSimpleName());
   }
 
   private class ChannelDuplexHandler extends io.netty.channel.ChannelDuplexHandler {
