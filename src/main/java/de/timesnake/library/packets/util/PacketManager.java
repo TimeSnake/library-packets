@@ -99,8 +99,7 @@ public class PacketManager implements Listener {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet)
-        throws Exception {
+    public void channelRead(ChannelHandlerContext channelHandlerContext, Object packet) throws Exception {
 
       if (!(packet instanceof Packet)) {
         super.channelRead(channelHandlerContext, packet);
@@ -119,8 +118,8 @@ public class PacketManager implements Listener {
     }
 
     @Override
-    public void write(ChannelHandlerContext channelHandlerContext, Object packet,
-                      ChannelPromise channelPromise) throws Exception {
+    public void write(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise channelPromise)
+        throws Exception {
 
       if (packet == null) {
         return;
