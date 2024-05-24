@@ -11,6 +11,9 @@ import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.Team;
 
+import java.util.Collection;
+import java.util.List;
+
 public class ClientboundSetPlayerTeamPacketBuilder {
 
   public static final Scoreboard DUMMY = new Scoreboard() {
@@ -31,10 +34,16 @@ public class ClientboundSetPlayerTeamPacketBuilder {
   };
 
   public static ClientboundSetPlayerTeamPacket ofCreate(String name, Component prefix, ChatFormatting color, Team.Visibility visibility) {
+    return ofCreate(name, prefix, color, visibility, List.of());
+  }
+
+  public static ClientboundSetPlayerTeamPacket ofCreate(String name, Component prefix, ChatFormatting color,
+                                                        Team.Visibility visibility, Collection<String> playerNames) {
     PlayerTeam team = new PlayerTeam(DUMMY, name);
     team.setPlayerPrefix(prefix);
     team.setColor(color);
     team.setNameTagVisibility(visibility);
+    team.getPlayers().addAll(playerNames);
     return ClientboundSetPlayerTeamPacket.createAddOrModifyPacket(team, true);
   }
 
@@ -52,13 +61,11 @@ public class ClientboundSetPlayerTeamPacketBuilder {
 
   public static ClientboundSetPlayerTeamPacket ofAddPlayer(String name, String player) {
     PlayerTeam team = new PlayerTeam(DUMMY, name);
-
     return ClientboundSetPlayerTeamPacket.createPlayerPacket(team, player, ClientboundSetPlayerTeamPacket.Action.ADD);
   }
 
   public static ClientboundSetPlayerTeamPacket ofRemovePlayer(String name, String player) {
     PlayerTeam team = new PlayerTeam(DUMMY, name);
-
     return ClientboundSetPlayerTeamPacket.createPlayerPacket(team, player, ClientboundSetPlayerTeamPacket.Action.REMOVE);
   }
 }

@@ -267,7 +267,7 @@ public enum TablistHead {
     return value;
   }
 
-  public Player asPlayer(String name) {
-    return PlayerBuilder.ofName(name, this.value, this.signature).build();
+  public Player asPlayer(String name, String tablistName) {
+    return PlayerBuilder.ofName(name, tablistName, this.value, this.signature).build();
   }
 }
