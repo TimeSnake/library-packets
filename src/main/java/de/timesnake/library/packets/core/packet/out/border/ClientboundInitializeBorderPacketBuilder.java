@@ -54,7 +54,7 @@ public class ClientboundInitializeBorderPacketBuilder {
       }
     };
 
-    worldBorder.world = ((org.bukkit.craftbukkit.v1_20_R1.CraftWorld) world).getHandle();
+    worldBorder.world = ((org.bukkit.craftbukkit.CraftWorld) world).getHandle();
 
     return new ClientboundInitializeBorderPacket(worldBorder);
   }
