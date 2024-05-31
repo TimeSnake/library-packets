@@ -62,7 +62,7 @@ public class ClientboundSetEntityDataPacketBuilder {
   }
 
   public ClientboundSetEntityDataPacketBuilder setPose(Pose pose) {
-    this.packet.packedItems().removeIf(i -> i.id() == POSE_ENTITY_DATA_ACCESSOR.getId());
+    this.packet.packedItems().removeIf(i -> i.id() == POSE_ENTITY_DATA_ACCESSOR.id());
     this.packet.packedItems().add(SynchedEntityData.DataValue.create(POSE_ENTITY_DATA_ACCESSOR, pose));
     return this;
   }
@@ -73,21 +73,21 @@ public class ClientboundSetEntityDataPacketBuilder {
   }
 
   public ClientboundSetEntityDataPacketBuilder setCustomName(String name) {
-    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.getId());
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.id());
     this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_CUSTOM_NAME_DATA_ACCESSOR,
         Optional.of(Component.literal(name))));
     return this;
   }
 
   public ClientboundSetEntityDataPacketBuilder setCustomName(Component component) {
-    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.getId());
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.id());
     this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_CUSTOM_NAME_DATA_ACCESSOR,
         Optional.of(component)));
     return this;
   }
 
   public ClientboundSetEntityDataPacketBuilder resetCustomName() {
-    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.getId());
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_DATA_ACCESSOR.id());
     this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_CUSTOM_NAME_DATA_ACCESSOR, Optional.empty()));
     return this;
   }
@@ -98,7 +98,7 @@ public class ClientboundSetEntityDataPacketBuilder {
   }
 
   public ClientboundSetEntityDataPacketBuilder setCustomNameVisible(Boolean flag) {
-    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR.getId());
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR.id());
     this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR, flag));
     return this;
   }
@@ -127,7 +127,7 @@ public class ClientboundSetEntityDataPacketBuilder {
 
   private void setSharedFlag(int index, boolean value) {
     byte b =
-        (byte) this.packet.packedItems().stream().filter(i -> i.id() == DATA_SHARED_FLAGS_ID_DATA_ACCESSOR.getId()).findFirst().get().value();
+        (byte) this.packet.packedItems().stream().filter(i -> i.id() == DATA_SHARED_FLAGS_ID_DATA_ACCESSOR.id()).findFirst().get().value();
 
     if (value) {
       b = (byte) (b | 1 << index);
@@ -139,16 +139,16 @@ public class ClientboundSetEntityDataPacketBuilder {
   }
 
   private void setFlags(byte flags) {
-    this.packet.packedItems().removeIf(i -> i.id() == DATA_SHARED_FLAGS_ID_DATA_ACCESSOR.getId());
+    this.packet.packedItems().removeIf(i -> i.id() == DATA_SHARED_FLAGS_ID_DATA_ACCESSOR.id());
     this.packet.packedItems().add(SynchedEntityData.DataValue.create(DATA_SHARED_FLAGS_ID_DATA_ACCESSOR, flags));
   }
 
   public static boolean isSharedFlagsPacket(ClientboundSetEntityDataPacket packet) {
-    return packet.packedItems().stream().anyMatch(v -> v.id() == DATA_SHARED_FLAGS_ID_DATA_ACCESSOR.getId());
+    return packet.packedItems().stream().anyMatch(v -> v.id() == DATA_SHARED_FLAGS_ID_DATA_ACCESSOR.id());
   }
 
   public static boolean isPosePacket(ClientboundSetEntityDataPacket packet) {
-    return packet.packedItems().stream().anyMatch(v -> v.id() == POSE_ENTITY_DATA_ACCESSOR.getId());
+    return packet.packedItems().stream().anyMatch(v -> v.id() == POSE_ENTITY_DATA_ACCESSOR.id());
   }
 
   @Nullable
@@ -166,7 +166,7 @@ public class ClientboundSetEntityDataPacketBuilder {
   @Nullable
   public static Pose getPoseOfPacket(ClientboundSetEntityDataPacket packet) {
     for (SynchedEntityData.DataValue<?> dataValue : packet.packedItems()) {
-      if (dataValue.id() == POSE_ENTITY_DATA_ACCESSOR.getId()) {
+      if (dataValue.id() == POSE_ENTITY_DATA_ACCESSOR.id()) {
         return ((Pose) dataValue.value());
       }
     }
@@ -178,7 +178,7 @@ public class ClientboundSetEntityDataPacketBuilder {
     Byte b = null;
 
     for (SynchedEntityData.DataValue<?> dataValue : packedItems) {
-      if (dataValue.id() == DATA_SHARED_FLAGS_ID_DATA_ACCESSOR.getId()) {
+      if (dataValue.id() == DATA_SHARED_FLAGS_ID_DATA_ACCESSOR.id()) {
         b = ((byte) dataValue.value());
       }
     }
