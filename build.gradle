@@ -33,7 +33,6 @@ dependencies {
   compileOnly "de.timesnake:library-entities:2.+"
 
   compileOnly "de.timesnake:library-basic:1.+"
-  compileOnly "de.timesnake:library-chat:1.+"
 
   paperweight.paperDevBundle('1.20-R0.1-SNAPSHOT')
 }
