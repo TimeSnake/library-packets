@@ -5,8 +5,7 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
 import de.timesnake.library.basic.util.Tuple;
-import de.timesnake.library.entities.proxy.ProxyManager;
-import de.timesnake.library.entities.proxy.SynchedEntityDataProxy;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -15,22 +14,62 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class ClientboundSetEntityDataPacketBuilder {
 
-  private static final EntityDataAccessor<Byte> DATA_SHARED_FLAGS_ID_DATA_ACCESSOR =
-      ProxyManager.getInstance().getEntityProxy().getDataSharedFlagsIdDataAccessor();
-  private static final EntityDataAccessor<Pose> POSE_ENTITY_DATA_ACCESSOR =
-      ProxyManager.getInstance().getEntityProxy().getDataPoseDataAccessor();
-  private static final EntityDataAccessor<Optional<Component>> DATA_CUSTOM_NAME_DATA_ACCESSOR =
-      ProxyManager.getInstance().getEntityProxy().getCustomNameDataAccessor();
-  private static final EntityDataAccessor<Boolean> DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR =
-      ProxyManager.getInstance().getEntityProxy().getCustomNameVisibleDataAccessor();
+  private static final EntityDataAccessor<Byte> DATA_SHARED_FLAGS_ID_DATA_ACCESSOR;
+  private static final EntityDataAccessor<Pose> POSE_ENTITY_DATA_ACCESSOR;
+  private static final EntityDataAccessor<Optional<Component>> DATA_CUSTOM_NAME_DATA_ACCESSOR;
+  private static final EntityDataAccessor<Boolean> DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR;
 
-  private static final SynchedEntityDataProxy SYNCED_ENTITY_DATA_PROXY =
-      ProxyManager.getInstance().getSynchedEntityDataProxy();
+  static {
+    try {
+      Field dataAccessorField = Entity.class.getDeclaredField("DATA_SHARED_FLAGS_ID");
+      dataAccessorField.setAccessible(true);
+      DATA_SHARED_FLAGS_ID_DATA_ACCESSOR = (EntityDataAccessor<Byte>) dataAccessorField.get(null);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
+
+    try {
+      Field dataAccessorField = Entity.class.getDeclaredField("DATA_POSE");
+      dataAccessorField.setAccessible(true);
+      POSE_ENTITY_DATA_ACCESSOR = (EntityDataAccessor<Pose>) dataAccessorField.get(null);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
+
+    try {
+      Field dataAccessorField = Entity.class.getDeclaredField("DATA_CUSTOM_NAME");
+      dataAccessorField.setAccessible(true);
+      DATA_CUSTOM_NAME_DATA_ACCESSOR = (EntityDataAccessor<Optional<Component>>) dataAccessorField.get(null);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
+
+    try {
+      Field dataAccessorField = Entity.class.getDeclaredField("DATA_CUSTOM_NAME_VISIBLE");
+      dataAccessorField.setAccessible(true);
+      DATA_CUSTOM_NAME_VISIBLE_DATA_ACCESSOR = (EntityDataAccessor<Boolean>) dataAccessorField.get(null);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private static Int2ObjectMap<SynchedEntityData.DataItem<?>> getSyncedEntityData_itemsById(SynchedEntityData synchedEntityData) {
+    Int2ObjectMap<SynchedEntityData.DataItem<?>> map;
+    try {
+      Field dataAccessorField = SynchedEntityData.class.getDeclaredField("itemsById");
+      dataAccessorField.setAccessible(true);
+      map = (Int2ObjectMap<SynchedEntityData.DataItem<?>>) dataAccessorField.get(synchedEntityData);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
+    return map;
+  }
 
   private final net.minecraft.world.entity.Entity entity;
   private final ClientboundSetEntityDataPacket packet;
@@ -51,7 +90,7 @@ public class ClientboundSetEntityDataPacketBuilder {
 
   public ClientboundSetEntityDataPacketBuilder setAllFromEntity() {
     this.packet.packedItems().clear();
-    this.packet.packedItems().addAll(SYNCED_ENTITY_DATA_PROXY.getItemsById(this.entity.getEntityData()).values().stream()
+    this.packet.packedItems().addAll(getSyncedEntityData_itemsById(this.entity.getEntityData()).values().stream()
         .map(SynchedEntityData.DataItem::value).toList());
     return this;
   }
