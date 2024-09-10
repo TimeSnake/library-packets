@@ -5,7 +5,6 @@
 package de.timesnake.library.packets.core.packet.out.entity;
 
 import de.timesnake.library.basic.util.Tuple;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -59,16 +58,16 @@ public class ClientboundSetEntityDataPacketBuilder {
     }
   }
 
-  private static Int2ObjectMap<SynchedEntityData.DataItem<?>> getSyncedEntityData_itemsById(SynchedEntityData synchedEntityData) {
-    Int2ObjectMap<SynchedEntityData.DataItem<?>> map;
+  private static SynchedEntityData.DataItem<?>[] getSyncedEntityData_itemsById(SynchedEntityData synchedEntityData) {
+    SynchedEntityData.DataItem<?>[] list;
     try {
       Field dataAccessorField = SynchedEntityData.class.getDeclaredField("itemsById");
       dataAccessorField.setAccessible(true);
-      map = (Int2ObjectMap<SynchedEntityData.DataItem<?>>) dataAccessorField.get(synchedEntityData);
+      list = (SynchedEntityData.DataItem<?>[]) dataAccessorField.get(synchedEntityData);
     } catch (NoSuchFieldException | IllegalAccessException e) {
       throw new RuntimeException(e);
     }
-    return map;
+    return list;
   }
 
   private final net.minecraft.world.entity.Entity entity;
@@ -90,7 +89,7 @@ public class ClientboundSetEntityDataPacketBuilder {
 
   public ClientboundSetEntityDataPacketBuilder setAllFromEntity() {
     this.packet.packedItems().clear();
-    this.packet.packedItems().addAll(getSyncedEntityData_itemsById(this.entity.getEntityData()).values().stream()
+    this.packet.packedItems().addAll(Arrays.stream(getSyncedEntityData_itemsById(this.entity.getEntityData()))
         .map(SynchedEntityData.DataItem::value).toList());
     return this;
   }
