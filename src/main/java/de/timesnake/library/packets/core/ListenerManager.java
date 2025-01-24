@@ -187,8 +187,7 @@ public class ListenerManager {
       for (Method method : subSet.getValue()) {
         try {
           Packet<ClientGamePacketListener> editedPacket =
-              (Packet<ClientGamePacketListener>) method.invoke(listener, packet,
-                  receiver);
+              (Packet<ClientGamePacketListener>) method.invoke(listener, packet, receiver);
           if (editedPacket == null) {
             block = true;
           } else {
